@@ -3,11 +3,24 @@
 	xmlns="http://www.w3.org/1999/xhtml">
 <head> </head>
 <body>
-	<form action="">
-		<label>PRUEBA</label>
-		<input type="text"></input>
 		
 		<label th:text="${hello}"></label>
-	</form>
+		<a th:href="@{/users/addNewUserPage}">Agregar nuevo usuario</a>
+			
+		<table>
+			<thead>
+				<tr >
+					<th>Nombre usuario</th>
+					<th>Apellido </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user :${allUsers}">
+					<td th:text="${user.name}"></td>
+					<td th:text="${user.lastname}"></td>
+				</tr>
+			</tbody>
+		</table>
+	
 </body>
 </html>

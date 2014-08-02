@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head> </head>
+<body>
+		<a th:href="@{/users}">Ver todos los clientes</a>
+		
+		<form action="" th:action="@{/newUser}">
+		
+			<label>nombre</label>
+			<input type="text" name="name" id="name"/>
+		
+			<label>apellido</label>
+			<input type="text" name="lastname" id="lastname"/>
+		
+		<input type="submit" value="agregar"/>
+		</form>
+	
+</body>
+</html>
