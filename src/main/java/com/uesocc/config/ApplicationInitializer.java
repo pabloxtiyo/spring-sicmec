@@ -16,6 +16,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @author xtiyo
  *
  */
+
 @Configuration
 public class ApplicationInitializer implements WebApplicationInitializer  {
 
@@ -41,7 +42,7 @@ public class ApplicationInitializer implements WebApplicationInitializer  {
 
 		
 		// Dispatcher servlet
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher_Localiza", new DispatcherServlet(
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher_uesocc", new DispatcherServlet(
 				rootContext));
 		
 		dispatcher.setLoadOnStartup(1);

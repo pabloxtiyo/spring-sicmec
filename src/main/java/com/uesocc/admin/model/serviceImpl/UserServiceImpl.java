@@ -5,7 +5,8 @@ package com.uesocc.admin.model.serviceImpl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	 * @see com.uesocc.framework.general.BaseService#setupService()
 	 */
 	
-	@Autowired
+	@Resource
 	private UserRepository UserRepository;
 	
 	@Override

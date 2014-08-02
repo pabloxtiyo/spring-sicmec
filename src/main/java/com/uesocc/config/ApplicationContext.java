@@ -47,9 +47,9 @@ import com.jolbox.bonecp.BoneCPDataSource;
  */
 
 @Configuration
-@ComponentScan(value = "com.uesocc.*")
+@ComponentScan(value ="com.uesocc.*")
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories("com.uesocc.admin.model.repository.*")
+@EnableJpaRepositories("com.uesocc.admin.model.*")
 @PropertySource("classpath:application.properties")
 @EnableWebMvc
 public class ApplicationContext extends WebMvcConfigurerAdapter {
@@ -58,7 +58,8 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 	private Environment env;
 	
 	@Bean
-	public DataSource dataSource() {
+	public DataSource dataSource() 
+	{
 		BoneCPDataSource datasource = new BoneCPDataSource();
 		datasource.setDriverClass(env.getRequiredProperty("db.driver"));
 		datasource.setJdbcUrl(env.getRequiredProperty("db.url"));
@@ -69,7 +70,8 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
-			JpaVendorAdapter jpaVendorAdapter) {
+			JpaVendorAdapter jpaVendorAdapter) 
+	{
 		LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
 		lef.setDataSource(dataSource);
 		lef.setJpaVendorAdapter(jpaVendorAdapter);
@@ -79,12 +81,14 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+	public EntityManager entityManager(EntityManagerFactory entityManagerFactory) 
+	{
 		return entityManagerFactory.createEntityManager();
 	}
 
 	@Bean
-	public JpaVendorAdapter jpaVendorAdapter() {
+	public JpaVendorAdapter jpaVendorAdapter() 
+	{
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(Boolean.parseBoolean(env.getRequiredProperty("hibernate.show_sql")));
 		hibernateJpaVendorAdapter.setGenerateDdl(Boolean.parseBoolean(env.getRequiredProperty("hibernate.GenerateDdl")));
@@ -92,7 +96,8 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 		return hibernateJpaVendorAdapter;
 	}
 
-	Properties additionalProperties() {
+	Properties additionalProperties() 
+	{
 		return new Properties() {
 			{ // Hibernate Specific:
 				setProperty("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
@@ -149,7 +154,8 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	public ThymeleafViewResolver thymeleafViewResolver() {
+	public ThymeleafViewResolver thymeleafViewResolver() 
+	{
 		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
 		resolver.setTemplateEngine(templateEngine());
 		resolver.setCharacterEncoding(env.getRequiredProperty("DEFAULT_ENCODING"));

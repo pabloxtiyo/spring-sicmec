@@ -35,11 +35,12 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="addNewUserPage")
+	@RequestMapping(value="/addNewUserPage")
 	public String newUserRequestPage()
 	{
 		return "newUserForm";
 	}
+	
 	@RequestMapping(value="/newUser",method=RequestMethod.POST)
 	public String newUser(@RequestParam(value="name")String name,
 			@RequestParam(value="lastname")String lastname)
