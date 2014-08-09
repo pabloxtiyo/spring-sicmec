@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.slf4j.*;
 import com.uesocc.admin.model.entity.User;
 import com.uesocc.admin.model.serviceImpl.UserServiceImpl;
 
@@ -20,15 +20,18 @@ import com.uesocc.admin.model.serviceImpl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/users")
-public class UserController {
+public class UserController 
+{
 
+	Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	private UserServiceImpl UserServiceImpl;
 	
 	@RequestMapping("")
 	public String defaultRequest(Model model)
 	{
-		model.addAttribute("hello", "Prueba de atributo");
+		model.addAttribute("hello", "Prueba uesocc");
 		model.addAttribute("allUsers", UserServiceImpl.findAll());
 		
 		return "prueba";
@@ -42,14 +45,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/newUser",method=RequestMethod.POST)
-	public String newUser(@RequestParam(value="name")String name,
-			@RequestParam(value="lastname")String lastname)
+	public String newUser(
+			@RequestParam(value="name")String name,
+			@RequestParam(value="lastname")String lastname
+			)
+			
 	{
+		logger.info("Creating new user..");
+		
 		User user = new User();
+		
 		user.setName(name);
 		user.setLastname(lastname);
-		
 		UserServiceImpl.insert(user);
+		
+		logger.debug("redirect to the default page");
 		
 		return "redirect:/users";
 	}
