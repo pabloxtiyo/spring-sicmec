@@ -11,6 +11,7 @@ import com.uesocc.framework.general.BaseService;
  * @date 2/8/2014
  */
 
-public interface UserService extends BaseService<User, Integer> {
+public interface UserService extends BaseService<User, Integer> 
+{
 
 }

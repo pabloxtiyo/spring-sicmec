@@ -38,9 +38,6 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import com.jolbox.bonecp.BoneCPDataSource;
 
 
-
-
-
 /**
  * @author pablo portillo
  * @date 31/7/2014
@@ -122,7 +119,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").
-        addResourceLocations("/WEB-INF/resources/").setCachePeriod(31556926);
+        addResourceLocations("/WEB-INF/resources/");
     }
 	
 	
@@ -181,4 +178,5 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 //                emailSender.setJavaMailProperties(mailProps);
 //        return emailSender;
 //    }
+
 }

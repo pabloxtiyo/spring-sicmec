@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2/8/2014
  */
 
-public interface BaseService<entity, ID extends Serializable> {
+public interface BaseService<T, ID extends Serializable> {
 	
 	public void setupService();
 
@@ -19,7 +19,7 @@ public interface BaseService<entity, ID extends Serializable> {
 	 * @param entity
 	 * @return The save entity
 	 */
-	public entity insert(entity entity);
+	public T insert(T entity);
 
 	/**
 	 * @param id
@@ -32,10 +32,11 @@ public interface BaseService<entity, ID extends Serializable> {
 	 * @param id
 	 * @return the entity find
 	 */
-	public entity findById(ID id);
+	public T findById(ID id);
 
 	/**
 	 * @return a list of entity's
 	 */
-	public List<entity> findAll();
+	public List<T> findAll();
+
 }

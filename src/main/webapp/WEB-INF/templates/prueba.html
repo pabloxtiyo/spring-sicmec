@@ -4,7 +4,11 @@
 <head> </head>
 <body>
 		
-		<label th:text="${hello}"></label>
+		<label th:text="${hello}">
+		</label>
+		<label th:text="#{default.general.name}">
+		</label>
+		
 		<a th:href="@{/users/addNewUserPage}">Agregar nuevo usuario</a>
 			
 		<table>
@@ -15,7 +19,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="user :${allUsers}">
+				<tr th:each="user : ${allUsers}">
 					<td th:text="${user.name}"></td>
 					<td th:text="${user.lastname}"></td>
 				</tr>

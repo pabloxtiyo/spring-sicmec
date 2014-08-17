@@ -31,7 +31,7 @@ public class UserController
 	@RequestMapping("")
 	public String defaultRequest(Model model)
 	{
-		model.addAttribute("hello", "Prueba uesocc");
+		model.addAttribute("hello", "cambio de prueba");
 		model.addAttribute("allUsers", UserServiceImpl.findAll());
 		
 		return "prueba";
