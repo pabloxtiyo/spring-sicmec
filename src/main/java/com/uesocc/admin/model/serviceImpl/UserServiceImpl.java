@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	/* (non-Javadoc)
 	 * @see com.uesocc.framework.general.BaseService#setupService()
 	 */
-	
+	 
 	@Resource
 	private UserRepository UserRepository;
 	

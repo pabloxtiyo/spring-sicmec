@@ -46,7 +46,7 @@ public class ApplicationInitializer implements WebApplicationInitializer  {
 				rootContext));
 		
 		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/*");
+		dispatcher.addMapping("/");
 		dispatcher.addMapping("*.css");
 		dispatcher.addMapping("*.png");
 		dispatcher.addMapping("*.ico");

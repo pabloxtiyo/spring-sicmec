@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:include="fragments/general :: headerFragment">
+	
+</head>
+<body>
+	<div th:replace="fragments/general :: navFragment"></div>
+	
+	<div class="container" style="min-height: 500px; overflow: auto;">
+		<div class="col-md-12 col-xs-12">			
+		<div class="row">
+			<div class="col-md-6">
+        		<h1>SISMEC</h1>
+        			<p class="lead">
+        				Sistema de control y monitoreo de pacientes con enfermedades cronicas
+        			</p>
+      		</div>
+      		<div class="col-md-6">
+        		
+      		</div>
+			
+		</div>	
+		</div>
+	</div>
+	
+	<div th:replace="fragments/general :: footerFragment"></div>
+	<div th:replace="fragments/general :: jsFragment"></div>
+	
+</body>
+</html>

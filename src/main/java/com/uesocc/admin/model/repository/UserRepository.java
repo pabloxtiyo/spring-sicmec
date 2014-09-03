@@ -16,5 +16,5 @@ import com.uesocc.admin.model.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer>
 {
-
+	
 }

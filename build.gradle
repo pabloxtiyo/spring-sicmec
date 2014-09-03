@@ -1,7 +1,9 @@
 buildscript {
     repositories {
-         maven { url "http://repo.spring.io/libs-milestone"
-        		url "http://repo.spring.io/milestone"}
+         maven { 
+         		url "http://repo.spring.io/libs-milestone"
+        		url "http://repo.spring.io/milestone"
+        		}
         
         mavenCentral()
     }
@@ -17,7 +19,8 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
-war {
+war 
+{
    baseName = 'prueba'
 }
 
@@ -67,7 +70,8 @@ task wrapper(type: Wrapper) {
 
 sourceSets {
     main {
-        java {
+        java 
+        {
             srcDirs = ["src/main/java", "src/main/resources", "src/main/webapp","src/main/framework"]
             
         }

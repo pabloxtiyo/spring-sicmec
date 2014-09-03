@@ -13,5 +13,5 @@ import com.uesocc.framework.general.BaseService;
 
 public interface UserService extends BaseService<User, Integer> 
 {
-
+	
 }
