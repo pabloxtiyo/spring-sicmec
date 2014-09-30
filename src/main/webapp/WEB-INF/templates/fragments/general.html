@@ -21,29 +21,67 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a th:href="@{/}" class="navbar-brand">Dashboard</a>
+      <a th:href="@{/}" class="navbar-brand">
+      	<i class="glyphicon glyphicon-home"></i>
+      	SICMEC
+      </a>
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="#">Agregar Paciente</a>
-        </li>
-        <li>
-          <a href="#">Generar Consulta</a>
-        </li>
-        <li>
-          <a href="#">Reportes</a>
-        </li>
-        <li>
-          <a href="#">Flujo de medicamentos</a>
-        </li>
-      </ul>
+     
+      <ul class="nav navbar-nav navbar-right">
+		<li>
+			<a href="#">
+			<i class="glyphicon glyphicon-user"></i>
+			<span id="session_user">USUARIO</span> </a>
+		</li>
+		<li class="">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			<i class="glyphicon glyphicon-cog"></i>
+			<span>AJUSTES</span>
+			</a>
+		</li>
+		<li><a href="#">
+			<i class="glyphicon glyphicon-share-alt"></i>
+			<span>CERRAR SESION</span>
+			</a>
+		</li>
+	 </ul>
       
     </nav>
   </div>
 
 <footer th:fragment="footerFragment">
-  <div class="row-fluid">
+
+<div class="container-fluid footer">
+	<div class="row footer">
+		<div class="col-md-4 text-left">
+			<!-- MINISTERIO DE SALUD
+			<br></br>Santa Ana
+			<br></br> 
+			El salvador -->
+		<div id="footer" class="span12" style="padding: 5px;">
+		<img alt="" th:src="@{/resources/images/logo_minsal.png}" height="60px" width="100px"/>
+		<!--  2014 &copy; MINSAL -->
+		</div>
+		</div>
+		<div class="col-md-4 text-center" style="padding-top: 1%;">
+			<b>MINISTERIO DE SALUD
+			<br></br>
+			EL SALVADOR
+			</b>
+		</div>
+		<div class="col-md-4 text-right visible-lg-inline" style="padding-top: 22px; padding-right: 7%;">
+			<ul class="list-inline">
+          		<li><i class="icon-facebook icon-2x"></i></li>
+          		<li><i class="icon-twitter icon-2x"></i></li>
+          		<li><i class="icon-google-plus icon-2x"></i></li>
+          		<li><i class="icon-pinterest icon-2x"></i></li>
+        	</ul>
+		</div>
+	</div>	
+</div>
+
+  <!-- <div class="row-fluid">
   		<div class="col-md-11">
   			<ul class="list-inline">
           		<li><i class="icon-facebook icon-2x"></i></li>
@@ -55,7 +93,7 @@
         <div class="col-md-1">	
   			<div id="footer" class="span12"> 2014 &copy; MINSAL</div>
   		</div>	
-  </div>
+  </div> -->
   
 </footer>
 

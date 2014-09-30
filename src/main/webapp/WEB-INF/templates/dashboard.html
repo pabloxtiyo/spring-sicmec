@@ -7,21 +7,36 @@
 <body>
 	<div th:replace="fragments/general :: navFragment"></div>
 	
-	<div class="container" style="min-height: 500px; overflow: auto;">
-		<div class="col-md-12 col-xs-12">			
+	<div class="container" style="min-height: 600px; overflow: auto;">
+	<div class="col-md-12 col-xs-12">			
+		<div class="row">
+			<div class="jumbotron">
+				<h1>Hospital San Juan de Dios</h1>
+			  	<p>Sistema de control y monitoreo de pacientes con enfermedades cronicas</p>
+			  	<p><a class="btn btn-primary btn-lg">Leer mas..</a></p>
+			</div>
+		</div>	
 		<div class="row">
 			<div class="col-md-6">
-        		<h1>SISMEC</h1>
+        		<h1>Historia</h1>
         			<p class="lead">
-        				Sistema de control y monitoreo de pacientes con enfermedades cronicas
+        			 El sistema de atención al paciente con enfermedad cronica, nacio de un 
+        			 esfuerzo conjunto entre egresados de la universidad de el salvador
+        			 y las autoridades del hospital san juan de Dios.
         			</p>
       		</div>
       		<div class="col-md-6">
+        		<h1>A quien va dirigido</h1>
+        			<p class="lead">
+					Esta iniciativa pretende mejorar la calidad de vida de 
+					alrededor de 2000 pacientes que sufren enfermedades
+					cronicas.
+        			</p>
         		
       		</div>
+      	</div>		
 			
 		</div>	
-		</div>
 	</div>
 	
 	<div th:replace="fragments/general :: footerFragment"></div>
