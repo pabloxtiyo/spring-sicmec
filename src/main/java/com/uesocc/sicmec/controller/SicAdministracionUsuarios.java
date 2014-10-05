@@ -18,6 +18,6 @@ public class SicAdministracionUsuarios
 	@RequestMapping("")
 	public String defaultRequest()
 	{
-		return "";
+		return "/admin/administracionUsuarios";
 	}
 }

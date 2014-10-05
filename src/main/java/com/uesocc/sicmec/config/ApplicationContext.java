@@ -44,7 +44,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
  */
 
 @Configuration
-@ComponentScan(value ="com.uesocc.*")
+@ComponentScan(value ="com.uesocc.sicmec.*")
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("com.uesocc.sicmec.model.*")
 @PropertySource("classpath:application.properties")
