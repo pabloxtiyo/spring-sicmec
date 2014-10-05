@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("")
-public class generalController 
+public class SicGeneralController 
 {
 	
 	@RequestMapping("/")

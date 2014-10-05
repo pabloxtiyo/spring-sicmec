@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.uesocc.framework.general;
+package com.uesocc.sicmec.framework.general;
 
 import java.io.Serializable;
 import java.util.List;
