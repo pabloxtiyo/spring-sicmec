@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.uesocc.admin.controller;
+package com.uesocc.sicmec.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

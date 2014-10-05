@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.uesocc.config;
+package com.uesocc.sicmec.config;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -46,7 +46,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @Configuration
 @ComponentScan(value ="com.uesocc.*")
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories("com.uesocc.admin.model.*")
+@EnableJpaRepositories("com.uesocc.sicmec.model.*")
 @PropertySource("classpath:application.properties")
 @EnableWebMvc
 public class ApplicationContext extends WebMvcConfigurerAdapter {

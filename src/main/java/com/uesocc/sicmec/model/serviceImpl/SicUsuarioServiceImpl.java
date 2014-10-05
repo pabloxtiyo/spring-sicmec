@@ -1,35 +1,31 @@
 /**
  * 
  */
-package com.uesocc.admin.model.serviceImpl;
+package com.uesocc.sicmec.model.serviceImpl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.uesocc.admin.model.entity.User;
-import com.uesocc.admin.model.repository.UserRepository;
-import com.uesocc.admin.model.service.UserService;
+import com.uesocc.sicmec.model.entity.SicUsuario;
+import com.uesocc.sicmec.model.repository.SicUsuarioRepository;
+import com.uesocc.sicmec.model.service.SicUsuarioService;
 
 /**
  * @author pablo portillo
- * @date 2/8/2014
+ * @date 5/10/2014
  */
 
 @Service
-@Transactional
-public class UserServiceImpl implements UserService {
+public class SicUsuarioServiceImpl implements SicUsuarioService {
 
+	@Autowired
+	private SicUsuarioRepository sicUsuarioRepository;
+	
 	/* (non-Javadoc)
 	 * @see com.uesocc.framework.general.BaseService#setupService()
 	 */
-	 
-	@Resource
-	private UserRepository UserRepository;
-	
 	@Override
 	public void setupService() {
 		// TODO Auto-generated method stub
@@ -40,40 +36,40 @@ public class UserServiceImpl implements UserService {
 	 * @see com.uesocc.framework.general.BaseService#insert(java.lang.Object)
 	 */
 	@Override
-	public User insert(User entity) {
+	public SicUsuario insert(SicUsuario entity) 
+	{
 		// TODO Auto-generated method stub
-		
-		return UserRepository.save(entity);
+		return this.sicUsuarioRepository.save(entity);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.uesocc.framework.general.BaseService#delete(java.io.Serializable)
 	 */
 	@Override
-	public Boolean delete(Integer id) {
+	public Boolean delete(Integer id) 
+	{
 		// TODO Auto-generated method stub
-		if(UserRepository.exists(id))
+		if(sicUsuarioRepository.exists(id))
 		{
-			UserRepository.delete(id);
+			sicUsuarioRepository.delete(id);
 			return true;
 		}
 		else
 		{
 			return false;
-		}	
-		
+		}
 	}
 
 	/* (non-Javadoc)
 	 * @see com.uesocc.framework.general.BaseService#findById(java.io.Serializable)
 	 */
 	@Override
-	public User findById(Integer id) {
+	public SicUsuario findById(Integer id) 
+	{
 		// TODO Auto-generated method stub
-		
-		if(UserRepository.exists(id))
+		if(sicUsuarioRepository.exists(id))
 		{
-			return UserRepository.findOne(id);
+			return sicUsuarioRepository.findOne(id);
 		}
 		else
 		{
@@ -85,12 +81,10 @@ public class UserServiceImpl implements UserService {
 	 * @see com.uesocc.framework.general.BaseService#findAll()
 	 */
 	@Override
-	public List<User> findAll() {
+	public List<SicUsuario> findAll() 
+	{
 		// TODO Auto-generated method stub
-		
-		List<User> users = UserRepository.findAll();
-		
-		return users;
+		return sicUsuarioRepository.findAll();
 	}
 
 }
