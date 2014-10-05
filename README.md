@@ -1,4 +1,12 @@
 spring-test
 ===========
+Proyecto basado en spring framework 
 
-Project test
+Tecnologias Utilizadas en el desarrollo:
+- Spring MVC
+- Spring DATA
+- Spring Security
+- Jquery
+- CSS Boostrap
+- Thymeleaf
+- HTML5
