@@ -8,15 +8,114 @@
 	<div th:replace="fragments/general :: navFragment"></div>
 	
 	<div class="container" style="min-height: 600px; overflow: auto;">
-		<div class="col-md-12 col-xs-12">
-		<div class="table-responsive">	
-			<table class="table table-hover">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<button class="btn btn-primary" th:text="#{admin.usuarios.add}"
+					data-toggle="modal" data-target="#modalAgregarUsuario">
+				
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+			<div class="widget-box">
+				<div class="widget-title">
+				</div>
+				<div class="widget-content">
+					<div class="table-responsive">	
+						<table class="table table-hover table-striped table-bordered">
+							<thead>
+								<tr class="head">
+									<th></th>
+									<th th:text="#{admin.usuarios.nombre}"></th>
+									<th th:text="#{admin.usuarios.apellido}"></th>
+									<th th:text="#{admin.usuarios.usuario}"></th>
+									<th th:text="#{admin.usuarios.tipo}"></th>
+									<th th:utext="#{admin.usuarios.mail}"></th>
+									<th th:utext="#{admin.usuarios.fxact}"></th>
+									<th th:utext="#{admin.usuarios.fxdes}"></th>
+								</tr>	
+							</thead>
+							<tbody>
+								<tr th:each="usuario : ${usuarios}">
+									<td>
+										<div class="btn-group">
+  											<button type="button" class="btn btn-danger">
+  												<i class="glyphicon glyphicon-trash"></i>
+  											</button>
+   											<button type="button" class="btn btn-default">
+   												<i class="glyphicon glyphicon-pencil"></i>
+   											</button>
+										</div>
+									</td>
+									<td th:text="${usuario.fkSicPersona.nombre}"></td>
+									<td th:text="${usuario.fkSicPersona.apellido}"></td>
+									<td th:text="${usuario.nombreUsuario}"></td>
+									<td th:text="${usuario.fkSicRol.nombreRol}"></td>
+									<td th:text="${usuario.fkSicPersona.email}"></td>
+									<td th:text="${usuario.fxActivacion}"></td>
+									<td th:text="${usuario.fxDesactivacion}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>	
+						
+			</div>
+		</div>
 			
-			</table>
-		</div>		
-		</div>	
 	</div>
 	
+<div class="modal fade" id="modalAgregarUsuario" tabindex="-1" role="dialog" aria-labelledby="modalAgregarUsuario" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        			<h4 class="modal-title" th:text="#{admin.usuarios.addmodal.titulo}"></h4>
+      			</div>
+      		<div class="modal-body">
+        		<div class="form-group">
+        			<label for="nombre" th:text="#{admin.usuarios.nombre}"></label>
+    				<input type="text" class="form-control" id="nombre" name="nombre" th:placeholder="#{admin.usuarios.nombre}" />
+        		</div>
+        		<div class="form-group">
+        			<label for="apellido" th:text="#{admin.usuarios.apellido}"></label>
+    				<input type="text" class="form-control" id="apellido" name="apellido" th:placeholder="#{admin.usuarios.apellido}" />
+        		</div>
+        		<div class="form-group">
+        			<label for="usuario" th:text="#{admin.usuarios.usuario}"></label>
+    				<input type="text" class="form-control" id="usuario" name="usuario" th:placeholder="#{admin.usuarios.usuario}" />
+        		</div>
+        		<div class="form-group">
+        			<label for="pass" th:utext="#{admin.usuarios.pass}"></label>
+    				<input type="password" class="form-control" id="pass" name="pass" />
+        		</div>
+        		<div class="form-group">
+        			<label for="passConfirm" th:utext="#{admin.usuarios.passConfirm}"></label>
+    				<input type="password" class="form-control" id="passConfirm" name="passConfirm" />
+        		</div>
+        		<div class="form-group">
+        			<label for="mail" th:utext="#{admin.usuarios.mail}"></label>
+    				<input type="text" class="form-control" id="mail" name="mail" />
+        		</div>
+        		
+        		<div class="form-group">
+        			<label for="rol" th:utext="#{admin.usuarios.mail}"></label>
+    				<select class="form-control" id="rol" name="rol">
+    					<option th:each="rol:${roles}" th:value="${rol.idSicRol}" th:text="${rol.nombreRol}"></option>
+    				</select>
+        		</div>
+        		
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{general.btn.cancelar}"></button>
+        		<button type="button" class="btn btn-primary" th:text="#{general.btn.guardar}"></button>
+      		</div>
+    	</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 	<div th:replace="fragments/general :: footerFragment"></div>
 	<div th:replace="fragments/general :: jsFragment"></div>
 	

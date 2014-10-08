@@ -22,3 +22,14 @@ body
 	color: white;
 	font-size: 14px;
 }
+
+.table
+{
+	margin-top: 2%;
+}
+
+.head
+{
+	background-color: gray;
+	color: white;
+}
