@@ -2813,6 +2813,7 @@ fieldset[disabled] .btn-default.active {
   color: #fff;
   background-color: #428bca;
   border-color: #357ebd;
+  font-weight: bold;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -4553,8 +4554,8 @@ a.list-group-item.active > .badge,
   padding: 30px;
   margin-bottom: 30px;
   color: inherit;
-  /* background-color: #eee; */
-  background-color: white;
+  background-color: #eee;
+  /*background-color: white;*/
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -4616,7 +4617,8 @@ a.thumbnail.active {
 }
 .alert {
   padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: -5px;
+  margin-top: 5px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
@@ -5459,6 +5461,8 @@ button.close {
 .modal-body {
   position: relative;
   padding: 15px;
+  height: 400px;
+  overflow: auto;
 }
 .modal-footer {
   padding: 15px;

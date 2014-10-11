@@ -194,9 +194,19 @@ public class SicUsuario implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.uesocc.model.entity.SicUsuario[ idSicUsuario=" + idSicUsuario + " ]";
-    }
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SicUsuario [idSicUsuario=" + idSicUsuario + ", nombreUsuario="
+				+ nombreUsuario + ", fxActivacion=" + fxActivacion
+				+ ", fxDesactivacion=" + fxDesactivacion + ", fxCreado="
+				+ fxCreado + ", creadoPor=" + creadoPor + ", fxModicado="
+				+ fxModicado + ", modicadoPor=" + modicadoPor + ", fkSicRol="
+				+ fkSicRol + ", fkSicPersona=" + fkSicPersona
+				+ ", sicCitaMedicaList=" + sicCitaMedicaList + "]";
+	}
+
     
 }
