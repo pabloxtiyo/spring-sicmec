@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  *
@@ -38,15 +39,19 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicPersona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_persona")
+    @Column(name = "id_sic_persona", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicPersona;
+    @Column(name = "nombre", length = 30)
     private String nombre;
+    @Column(name = "apellido", length = 30)
     private String apellido;
     @Basic(optional = false)
+    @Column(name = "email", nullable = false, length = 30)
     private String email;
     @OneToMany(mappedBy = "fkSicPersona")
+    @JsonManagedReference
     private List<SicUsuario> sicUsuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicPersona")
     private List<SicPaciente> sicPacienteList;
@@ -135,7 +140,7 @@ public class SicPersona implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicPersona[ idSicPersona=" + idSicPersona + " ]";
+        return "com.uesocc.sicmec.model.entity.SicPersona[ idSicPersona=" + idSicPersona + " ]";
     }
     
 }

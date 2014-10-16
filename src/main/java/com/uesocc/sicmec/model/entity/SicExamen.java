@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,24 +43,24 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicExamen implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_examen")
+    @Column(name = "id_sic_examen", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicExamen;
-    @Column(name = "nombre_examen")
+    @Column(name = "nombre_examen", length = 30)
     private String nombreExamen;
     @Basic(optional = false)
-    @Column(name = "descripcion_examen")
+    @Column(name = "descripcion_examen", nullable = false, length = 300)
     private String descripcionExamen;
     @Column(name = "fx_creado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxCreado;
-    @Column(name = "creado_por")
+    @Column(name = "creado_por", length = 50)
     private String creadoPor;
     @Column(name = "fx_modificado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxModificado;
-    @Column(name = "modifcado_por")
+    @Column(name = "modifcado_por", length = 50)
     private String modifcadoPor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicExamen")
     private List<SicExamenCita> sicExamenCitaList;
@@ -165,7 +164,7 @@ public class SicExamen implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicExamen[ idSicExamen=" + idSicExamen + " ]";
+        return "com.uesocc.sicmec.model.entity.SicExamen[ idSicExamen=" + idSicExamen + " ]";
     }
     
 }

@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,6 +26,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  *
  * @author xtiyo
@@ -43,20 +44,23 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicCitaMedica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_cita_medica")
+    @Column(name = "id_sic_cita_medica", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicCitaMedica;
     @Column(name = "fx_cita_medica")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxCitaMedica;
+    @Column(name = "diagnostico", length = 500)
     private String diagnostico;
     @Basic(optional = false)
+    @Column(name = "comentario", nullable = false, length = 500)
     private String comentario;
     @JoinColumn(name = "fk_sic_usuario", referencedColumnName = "id_sic_usuario")
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JsonBackReference
     private SicUsuario fkSicUsuario;
-    @JoinColumn(name = "fk_sic_paciente", referencedColumnName = "id_sic_paciente")
+    @JoinColumn(name = "fk_sic_paciente", referencedColumnName = "id_sic_paciente", nullable = false)
     @ManyToOne(optional = false)
     private SicPaciente fkSicPaciente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicCitaMedica")
@@ -164,7 +168,7 @@ public class SicCitaMedica implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicCitaMedica[ idSicCitaMedica=" + idSicCitaMedica + " ]";
+        return "com.uesocc.sicmec.model.entity.SicCitaMedica[ idSicCitaMedica=" + idSicCitaMedica + " ]";
     }
     
 }

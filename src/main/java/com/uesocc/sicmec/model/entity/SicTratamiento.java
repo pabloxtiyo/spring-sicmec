@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,19 +42,21 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicTratamiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_tratamiento")
+    @Column(name = "id_sic_tratamiento", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicTratamiento;
     @Basic(optional = false)
+    @Column(name = "comentario", nullable = false, length = 300)
     private String comentario;
+    @Column(name = "periodisidad", length = 50)
     private String periodisidad;
     @Column(name = "fx_tratamiento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxTratamiento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicTratamiento")
     private List<SicEntregaTratamiento> sicEntregaTratamientoList;
-    @JoinColumn(name = "fk_sic_cita_medica", referencedColumnName = "id_sic_cita_medica")
+    @JoinColumn(name = "fk_sic_cita_medica", referencedColumnName = "id_sic_cita_medica", nullable = false)
     @ManyToOne(optional = false)
     private SicCitaMedica fkSicCitaMedica;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicTratamiento")
@@ -153,7 +154,7 @@ public class SicTratamiento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicTratamiento[ idSicTratamiento=" + idSicTratamiento + " ]";
+        return "com.uesocc.sicmec.model.entity.SicTratamiento[ idSicTratamiento=" + idSicTratamiento + " ]";
     }
     
 }

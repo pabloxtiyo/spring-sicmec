@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,16 +37,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SicEntregaTratamiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_entrega_tratamiento")
+    @Column(name = "id_sic_entrega_tratamiento", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicEntregaTratamiento;
     @Basic(optional = false)
+    @Column(name = "comentario", nullable = false, length = 300)
     private String comentario;
     @Column(name = "fx_entrega_tratamiento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxEntregaTratamiento;
-    @JoinColumn(name = "fk_sic_tratamiento", referencedColumnName = "id_sic_tratamiento")
+    @JoinColumn(name = "fk_sic_tratamiento", referencedColumnName = "id_sic_tratamiento", nullable = false)
     @ManyToOne(optional = false)
     private SicTratamiento fkSicTratamiento;
 
@@ -117,7 +117,7 @@ public class SicEntregaTratamiento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicEntregaTratamiento[ idSicEntregaTratamiento=" + idSicEntregaTratamiento + " ]";
+        return "com.uesocc.sicmec.model.entity.SicEntregaTratamiento[ idSicEntregaTratamiento=" + idSicEntregaTratamiento + " ]";
     }
     
 }

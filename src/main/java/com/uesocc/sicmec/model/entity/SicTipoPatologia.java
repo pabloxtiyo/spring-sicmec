@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,17 +37,17 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicTipoPatologia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_tipo_patologia")
+    @Column(name = "id_sic_tipo_patologia", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicTipoPatologia;
-    @Column(name = "nombre_tipo_patologia")
+    @Column(name = "nombre_tipo_patologia", length = 30)
     private String nombreTipoPatologia;
-    @Column(name = "descripcion_tipo_patologia")
+    @Column(name = "descripcion_tipo_patologia", length = 30)
     private String descripcionTipoPatologia;
     @OneToMany(mappedBy = "fkSicTipoPatologia")
     private List<SicPaciente> sicPacienteList;
-    @JoinColumn(name = "fk_sic_patologia", referencedColumnName = "id_sic_patologia")
+    @JoinColumn(name = "fk_sic_patologia", referencedColumnName = "id_sic_patologia", nullable = false)
     @ManyToOne(optional = false)
     private SicPatologia fkSicPatologia;
 
@@ -122,7 +121,7 @@ public class SicTipoPatologia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicTipoPatologia[ idSicTipoPatologia=" + idSicTipoPatologia + " ]";
+        return "com.uesocc.sicmec.model.entity.SicTipoPatologia[ idSicTipoPatologia=" + idSicTipoPatologia + " ]";
     }
     
 }

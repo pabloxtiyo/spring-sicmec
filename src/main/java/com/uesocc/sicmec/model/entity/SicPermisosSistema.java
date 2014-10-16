@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,13 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicPermisosSistema implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_permisos_sistema")
+    @Column(name = "id_sic_permisos_sistema", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicPermisosSistema;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicPermisosSistema")
     private List<SicAsignacionPermisos> sicAsignacionPermisosList;
-    @JoinColumn(name = "fk_sic_rol", referencedColumnName = "id_sic_rol")
+    @JoinColumn(name = "fk_sic_rol", referencedColumnName = "id_sic_rol", nullable = false)
     @ManyToOne(optional = false)
     private SicRol fkSicRol;
 
@@ -101,7 +100,7 @@ public class SicPermisosSistema implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicPermisosSistema[ idSicPermisosSistema=" + idSicPermisosSistema + " ]";
+        return "com.uesocc.sicmec.model.entity.SicPermisosSistema[ idSicPermisosSistema=" + idSicPermisosSistema + " ]";
     }
     
 }

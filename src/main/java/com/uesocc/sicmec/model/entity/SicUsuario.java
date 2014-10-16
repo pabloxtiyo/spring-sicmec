@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,6 +25,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  *
@@ -47,11 +50,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_usuario")
+    @Column(name = "id_sic_usuario", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicUsuario;
-    @Column(name = "nombre_usuario")
+    @Column(name = "nombre_usuario", length = 50)
     private String nombreUsuario;
     @Column(name = "fx_activacion")
     @Temporal(TemporalType.DATE)
@@ -62,20 +65,23 @@ public class SicUsuario implements Serializable {
     @Column(name = "fx_creado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxCreado;
-    @Column(name = "creado_por")
+    @Column(name = "creado_por", length = 50)
     private String creadoPor;
     @Column(name = "fx_modicado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxModicado;
-    @Column(name = "modicado_por")
+    @Column(name = "modicado_por", length = 50)
     private String modicadoPor;
     @JoinColumn(name = "fk_sic_rol", referencedColumnName = "id_sic_rol")
     @ManyToOne
+    @JsonBackReference
     private SicRol fkSicRol;
     @JoinColumn(name = "fk_sic_persona", referencedColumnName = "id_sic_persona")
     @ManyToOne
+    @JsonBackReference
     private SicPersona fkSicPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicUsuario")
+    @JsonIgnore
     private List<SicCitaMedica> sicCitaMedicaList;
 
     public SicUsuario() {
@@ -194,19 +200,9 @@ public class SicUsuario implements Serializable {
         return true;
     }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "SicUsuario [idSicUsuario=" + idSicUsuario + ", nombreUsuario="
-				+ nombreUsuario + ", fxActivacion=" + fxActivacion
-				+ ", fxDesactivacion=" + fxDesactivacion + ", fxCreado="
-				+ fxCreado + ", creadoPor=" + creadoPor + ", fxModicado="
-				+ fxModicado + ", modicadoPor=" + modicadoPor + ", fkSicRol="
-				+ fkSicRol + ", fkSicPersona=" + fkSicPersona
-				+ ", sicCitaMedicaList=" + sicCitaMedicaList + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "com.uesocc.sicmec.model.entity.SicUsuario[ idSicUsuario=" + idSicUsuario + " ]";
+    }
     
 }

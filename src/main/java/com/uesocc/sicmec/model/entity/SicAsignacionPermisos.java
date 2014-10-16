@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,20 +35,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SicAsignacionPermisos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_asignacion_permisos")
+    @Column(name = "id_sic_asignacion_permisos", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicAsignacionPermisos;
     @Basic(optional = false)
+    @Column(name = "agregar", nullable = false)
     private boolean agregar;
     @Basic(optional = false)
+    @Column(name = "modificar", nullable = false)
     private boolean modificar;
     @Basic(optional = false)
+    @Column(name = "eliminar", nullable = false)
     private boolean eliminar;
-    @JoinColumn(name = "fk_sic_recurso", referencedColumnName = "id_sic_recurso")
+    @JoinColumn(name = "fk_sic_recurso", referencedColumnName = "id_sic_recurso", nullable = false)
     @ManyToOne(optional = false)
     private SicRecurso fkSicRecurso;
-    @JoinColumn(name = "fk_sic_permisos_sistema", referencedColumnName = "id_sic_permisos_sistema")
+    @JoinColumn(name = "fk_sic_permisos_sistema", referencedColumnName = "id_sic_permisos_sistema", nullable = false)
     @ManyToOne(optional = false)
     private SicPermisosSistema fkSicPermisosSistema;
 
@@ -137,7 +139,7 @@ public class SicAsignacionPermisos implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicAsignacionPermisos[ idSicAsignacionPermisos=" + idSicAsignacionPermisos + " ]";
+        return "com.uesocc.sicmec.model.entity.SicAsignacionPermisos[ idSicAsignacionPermisos=" + idSicAsignacionPermisos + " ]";
     }
     
 }

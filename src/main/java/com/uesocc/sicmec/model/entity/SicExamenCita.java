@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,29 +42,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SicExamenCita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_examen_cita")
+    @Column(name = "id_sic_examen_cita", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicExamenCita;
     @Basic(optional = false)
+    @Column(name = "comentario", nullable = false, length = 300)
     private String comentario;
+    @Column(name = "pediente")
     private Boolean pediente;
     @Basic(optional = false)
+    @Column(name = "resultado", nullable = false, length = 50)
     private String resultado;
     @Column(name = "fx_creado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxCreado;
-    @Column(name = "creado_por")
+    @Column(name = "creado_por", length = 50)
     private String creadoPor;
     @Column(name = "fx_modificado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxModificado;
-    @Column(name = "modificado_por")
+    @Column(name = "modificado_por", length = 50)
     private String modificadoPor;
-    @JoinColumn(name = "fk_sic_examen", referencedColumnName = "id_sic_examen")
+    @JoinColumn(name = "fk_sic_examen", referencedColumnName = "id_sic_examen", nullable = false)
     @ManyToOne(optional = false)
     private SicExamen fkSicExamen;
-    @JoinColumn(name = "fk_sic_cita_medica", referencedColumnName = "id_sic_cita_medica")
+    @JoinColumn(name = "fk_sic_cita_medica", referencedColumnName = "id_sic_cita_medica", nullable = false)
     @ManyToOne(optional = false)
     private SicCitaMedica fkSicCitaMedica;
 
@@ -184,7 +186,7 @@ public class SicExamenCita implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicExamenCita[ idSicExamenCita=" + idSicExamenCita + " ]";
+        return "com.uesocc.sicmec.model.entity.SicExamenCita[ idSicExamenCita=" + idSicExamenCita + " ]";
     }
     
 }

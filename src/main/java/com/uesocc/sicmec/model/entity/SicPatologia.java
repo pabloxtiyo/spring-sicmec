@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,24 +43,24 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicPatologia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_patologia")
+    @Column(name = "id_sic_patologia", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicPatologia;
-    @Column(name = "nombre_patologia")
+    @Column(name = "nombre_patologia", length = 30)
     private String nombrePatologia;
     @Basic(optional = false)
-    @Column(name = "descripcion_patologia")
+    @Column(name = "descripcion_patologia", nullable = false, length = 300)
     private String descripcionPatologia;
     @Column(name = "fx_creado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxCreado;
-    @Column(name = "creado_por")
+    @Column(name = "creado_por", length = 50)
     private String creadoPor;
     @Column(name = "fx_modicado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxModicado;
-    @Column(name = "modifcado_por")
+    @Column(name = "modifcado_por", length = 50)
     private String modifcadoPor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicPatologia")
     private List<SicTipoPatologia> sicTipoPatologiaList;
@@ -165,7 +164,7 @@ public class SicPatologia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicPatologia[ idSicPatologia=" + idSicPatologia + " ]";
+        return "com.uesocc.sicmec.model.entity.SicPatologia[ idSicPatologia=" + idSicPatologia + " ]";
     }
     
 }

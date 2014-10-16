@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,19 +44,19 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicPaciente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_paciente")
+    @Column(name = "id_sic_paciente", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicPaciente;
     @Basic(optional = false)
-    @Column(name = "fk_expediente")
+    @Column(name = "fk_expediente", nullable = false)
     private int fkExpediente;
     @Basic(optional = false)
-    @Column(name = "telefono_paciente")
+    @Column(name = "telefono_paciente", nullable = false, length = 10)
     private String telefonoPaciente;
-    @Column(name = "direccion_paciente")
+    @Column(name = "direccion_paciente", length = 100)
     private String direccionPaciente;
-    @Column(name = "sexo_paciente")
+    @Column(name = "sexo_paciente", length = 2)
     private String sexoPaciente;
     @Column(name = "fx_nacimiento")
     @Temporal(TemporalType.DATE)
@@ -67,7 +66,7 @@ public class SicPaciente implements Serializable {
     @JoinColumn(name = "fk_sic_tipo_patologia", referencedColumnName = "id_sic_tipo_patologia")
     @ManyToOne
     private SicTipoPatologia fkSicTipoPatologia;
-    @JoinColumn(name = "fk_sic_persona", referencedColumnName = "id_sic_persona")
+    @JoinColumn(name = "fk_sic_persona", referencedColumnName = "id_sic_persona", nullable = false)
     @ManyToOne(optional = false)
     private SicPersona fkSicPersona;
     @JoinColumn(name = "fk_sic_municipio", referencedColumnName = "id_sic_municipio")
@@ -190,7 +189,7 @@ public class SicPaciente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicPaciente[ idSicPaciente=" + idSicPaciente + " ]";
+        return "com.uesocc.sicmec.model.entity.SicPaciente[ idSicPaciente=" + idSicPaciente + " ]";
     }
     
 }

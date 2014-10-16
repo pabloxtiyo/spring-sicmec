@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,16 +33,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SicTratamientoMedicamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_tratamiento_medicamento")
+    @Column(name = "id_sic_tratamiento_medicamento", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicTratamientoMedicamento;
-    @Column(name = "cantidad_dosis")
+    @Column(name = "cantidad_dosis", length = 100)
     private String cantidadDosis;
-    @JoinColumn(name = "fk_sic_tratamiento", referencedColumnName = "id_sic_tratamiento")
+    @JoinColumn(name = "fk_sic_tratamiento", referencedColumnName = "id_sic_tratamiento", nullable = false)
     @ManyToOne(optional = false)
     private SicTratamiento fkSicTratamiento;
-    @JoinColumn(name = "fk_sic_medicamento", referencedColumnName = "id_sic_medicamento")
+    @JoinColumn(name = "fk_sic_medicamento", referencedColumnName = "id_sic_medicamento", nullable = false)
     @ManyToOne(optional = false)
     private SicMedicamento fkSicMedicamento;
 
@@ -108,7 +107,7 @@ public class SicTratamientoMedicamento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicTratamientoMedicamento[ idSicTratamientoMedicamento=" + idSicTratamientoMedicamento + " ]";
+        return "com.uesocc.sicmec.model.entity.SicTratamientoMedicamento[ idSicTratamientoMedicamento=" + idSicTratamientoMedicamento + " ]";
     }
     
 }

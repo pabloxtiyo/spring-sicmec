@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,13 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicMedicamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_medicamento")
+    @Column(name = "id_sic_medicamento", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicMedicamento;
-    @Column(name = "nombre_medicamento")
+    @Column(name = "nombre_medicamento", length = 100)
     private String nombreMedicamento;
-    @Column(name = "descripcion_medicamento")
+    @Column(name = "descripcion_medicamento", length = 300)
     private String descripcionMedicamento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicMedicamento")
     private List<SicTratamientoMedicamento> sicTratamientoMedicamentoList;
@@ -110,7 +109,7 @@ public class SicMedicamento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicMedicamento[ idSicMedicamento=" + idSicMedicamento + " ]";
+        return "com.uesocc.sicmec.model.entity.SicMedicamento[ idSicMedicamento=" + idSicMedicamento + " ]";
     }
     
 }

@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,15 +38,15 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicRecurso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_recurso")
+    @Column(name = "id_sic_recurso", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicRecurso;
-    @Column(name = "url_recurso")
+    @Column(name = "url_recurso", length = 100)
     private String urlRecurso;
-    @Column(name = "descripcion_recurso")
+    @Column(name = "descripcion_recurso", length = 300)
     private String descripcionRecurso;
-    @JoinColumn(name = "fk_sic_cat_recurso", referencedColumnName = "id_sic_cat_recurso")
+    @JoinColumn(name = "fk_sic_cat_recurso", referencedColumnName = "id_sic_cat_recurso", nullable = false)
     @ManyToOne(optional = false)
     private SicCatRecurso fkSicCatRecurso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicRecurso")
@@ -123,7 +122,7 @@ public class SicRecurso implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicRecurso[ idSicRecurso=" + idSicRecurso + " ]";
+        return "com.uesocc.sicmec.model.entity.SicRecurso[ idSicRecurso=" + idSicRecurso + " ]";
     }
     
 }

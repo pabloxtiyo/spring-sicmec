@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,9 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SicConfiguracion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_configuracion")
+    @Column(name = "id_sic_configuracion", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicConfiguracion;
     @Column(name = "con_tiempo_abandono")
     private Boolean conTiempoAbandono;
@@ -95,7 +94,7 @@ public class SicConfiguracion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicConfiguracion[ idSicConfiguracion=" + idSicConfiguracion + " ]";
+        return "com.uesocc.sicmec.model.entity.SicConfiguracion[ idSicConfiguracion=" + idSicConfiguracion + " ]";
     }
     
 }

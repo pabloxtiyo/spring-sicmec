@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.uesocc.sicmec.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,6 +23,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  *
@@ -44,26 +45,27 @@ import javax.xml.bind.annotation.XmlTransient;
 public class SicRol implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_sic_rol")
+    @Column(name = "id_sic_rol", nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicRol;
-    @Column(name = "nombre_rol")
+    @Column(name = "nombre_rol", length = 30)
     private String nombreRol;
     @Basic(optional = false)
-    @Column(name = "descripcion_rol")
+    @Column(name = "descripcion_rol", nullable = false, length = 100)
     private String descripcionRol;
     @Column(name = "fx_creado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxCreado;
-    @Column(name = "creado_por")
+    @Column(name = "creado_por", length = 50)
     private String creadoPor;
     @Column(name = "fx_modicado")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fxModicado;
-    @Column(name = "modicado_por")
+    @Column(name = "modicado_por", length = 50)
     private String modicadoPor;
     @OneToMany(mappedBy = "fkSicRol")
+    @JsonManagedReference
     private List<SicUsuario> sicUsuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicRol")
     private List<SicPermisosSistema> sicPermisosSistemaList;
@@ -176,7 +178,7 @@ public class SicRol implements Serializable {
 
     @Override
     public String toString() {
-        return "com.uesocc.model.entity.SicRol[ idSicRol=" + idSicRol + " ]";
+        return "com.uesocc.sicmec.model.entity.SicRol[ idSicRol=" + idSicRol + " ]";
     }
     
 }
