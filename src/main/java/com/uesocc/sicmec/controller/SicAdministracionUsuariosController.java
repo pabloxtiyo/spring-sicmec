@@ -5,14 +5,19 @@ package com.uesocc.sicmec.controller;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.uesocc.sicmec.model.entity.SicPersona;
 import com.uesocc.sicmec.model.entity.SicUsuario;
 import com.uesocc.sicmec.model.serviceImpl.SicPersonaServiceImpl;
@@ -82,5 +87,11 @@ public class SicAdministracionUsuariosController
 		redirectAttributes.addFlashAttribute("success",true);
 		
 		return "redirect:/admin/usuarios";
+	}
+	
+	@RequestMapping(value="/getUser/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody SicUsuario getUser(@PathVariable(value="id")int id)
+	{
+		return sicUsuarioServiceImpl.findById(id);
 	}
 }
