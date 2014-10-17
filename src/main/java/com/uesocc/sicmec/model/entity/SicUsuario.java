@@ -27,8 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  *
@@ -81,7 +79,6 @@ public class SicUsuario implements Serializable {
     @JsonBackReference
     private SicPersona fkSicPersona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkSicUsuario")
-    @JsonIgnore
     private List<SicCitaMedica> sicCitaMedicaList;
 
     public SicUsuario() {

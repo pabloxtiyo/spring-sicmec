@@ -3,6 +3,8 @@
  */
 package com.uesocc.sicmec.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.uesocc.sicmec.model.entity.SicPersona;
+import com.uesocc.sicmec.model.dto.SicPersonaDto;
+import com.uesocc.sicmec.model.dto.SicUsuarioDto;
 import com.uesocc.sicmec.model.entity.SicUsuario;
 import com.uesocc.sicmec.model.serviceImpl.SicPersonaServiceImpl;
 import com.uesocc.sicmec.model.serviceImpl.SicRolServiceImpl;
@@ -59,27 +62,29 @@ public class SicAdministracionUsuariosController
 			@RequestParam(value="pass")String pass,
 			@RequestParam(value="mail")String mail,
 			@RequestParam(value="rol")int rol,
-			RedirectAttributes redirectAttributes)
+			RedirectAttributes redirectAttributes) throws ParseException
 	{
 		
 		LOGGER.debug("Creando nuevo usuario");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		SicPersona persona = new SicPersona();
+		SicPersonaDto persona = new SicPersonaDto();
 		persona.setNombre(nombre);
 		persona.setApellido(apellido);
 		persona.setEmail(mail);
 		
-		SicUsuario user = new SicUsuario();
-		user.setFxActivacion(new Date());
+		SicUsuarioDto user = new SicUsuarioDto();
+		user.setFxActivacion(simpleformat.format(new Date()));
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 2);
-		user.setFxDesactivacion(cal.getTime());
+		cal.add(Calendar.YEAR, 2);
+		user.setFxDesactivacion(simpleformat.format(cal.getTime()));
 		user.setCreadoPor("prueba");
 		user.setModicadoPor("prueba");
-		user.setFxCreado(new Date());
-		user.setFxModicado(new Date());
-		user.setFkSicPersona(sicPersonaServiceImpl.insert(persona));
-		user.setFkSicRol(sicRolServiceImpl.findById(rol));
+		user.setFxCreado(format.format(new Date()));
+		user.setFxModicado(format.format(new Date()));
+		user.setSicPersona(sicPersonaServiceImpl.insert(persona));
+		user.setSicRol(sicRolServiceImpl.findById(rol));
 		
 		LOGGER.info(user);
 		sicUsuarioServiceImpl.insert(user);
@@ -90,7 +95,7 @@ public class SicAdministracionUsuariosController
 	}
 	
 	@RequestMapping(value="/getUser/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody SicUsuario getUser(@PathVariable(value="id")int id)
+	public @ResponseBody SicUsuarioDto getUser(@PathVariable(value="id")int id)
 	{
 		return sicUsuarioServiceImpl.findById(id);
 	}

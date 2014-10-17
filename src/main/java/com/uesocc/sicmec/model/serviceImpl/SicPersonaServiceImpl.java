@@ -3,11 +3,14 @@
  */
 package com.uesocc.sicmec.model.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uesocc.sicmec.model.adapter.SicPersonaAdapter;
+import com.uesocc.sicmec.model.dto.SicPersonaDto;
 import com.uesocc.sicmec.model.entity.SicPersona;
 import com.uesocc.sicmec.model.repository.SicPersonaRepository;
 import com.uesocc.sicmec.model.service.SicPersonaService;
@@ -34,9 +37,11 @@ public class SicPersonaServiceImpl implements SicPersonaService {
 	 * @see com.uesocc.sicmec.framework.general.BaseService#insert(java.lang.Object)
 	 */
 	@Override
-	public SicPersona insert(SicPersona entity) {
+	public SicPersonaDto insert(SicPersonaDto entity) {
 		// TODO Auto-generated method stub
-		return sicPersonaRepository.save(entity);
+		SicPersonaAdapter adp = new SicPersonaAdapter();
+		SicPersona obj = adp.dtoToEntity(entity);
+		return adp.entityToDto(sicPersonaRepository.save(obj));
 	}
 
 	/* (non-Javadoc)
@@ -61,12 +66,14 @@ public class SicPersonaServiceImpl implements SicPersonaService {
 	 * @see com.uesocc.sicmec.framework.general.BaseService#findById(java.io.Serializable)
 	 */
 	@Override
-	public SicPersona findById(Integer id) {
+	public SicPersonaDto findById(Integer id) {
 		// TODO Auto-generated method stub
+		SicPersonaAdapter adp = new SicPersonaAdapter();
+		
 		if(sicPersonaRepository.exists(id))
 		{
 			
-			return sicPersonaRepository.findOne(id);
+			return adp.entityToDto(sicPersonaRepository.findOne(id));
 		}
 		else
 		{
@@ -78,9 +85,19 @@ public class SicPersonaServiceImpl implements SicPersonaService {
 	 * @see com.uesocc.sicmec.framework.general.BaseService#findAll()
 	 */
 	@Override
-	public List<SicPersona> findAll() {
+	public List<SicPersonaDto> findAll() {
 		// TODO Auto-generated method stub
-		return sicPersonaRepository.findAll();
+		List<SicPersona> list = sicPersonaRepository.findAll();
+		List<SicPersonaDto> list_dto =new ArrayList<SicPersonaDto>();
+		SicPersonaAdapter adp = new SicPersonaAdapter();
+		
+		for (SicPersona sicPersona : list) 
+		{
+			list_dto.add(adp.entityToDto(sicPersona));
+		}
+		
+		
+		return list_dto;
 	}
 
 }

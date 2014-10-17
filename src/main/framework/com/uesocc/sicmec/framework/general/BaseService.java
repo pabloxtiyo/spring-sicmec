@@ -4,6 +4,7 @@
 package com.uesocc.sicmec.framework.general;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -11,15 +12,16 @@ import java.util.List;
  * @date 2/8/2014
  */
 
-public interface BaseService<T, ID extends Serializable> {
+public interface BaseService<DTO, ID extends Serializable> {
 	
 	public void setupService();
 
 	/**
 	 * @param entity
 	 * @return The save entity
+	 * @throws ParseException 
 	 */
-	public T insert(T entity);
+	public DTO insert(DTO entity) throws ParseException;
 
 	/**
 	 * @param id
@@ -32,11 +34,11 @@ public interface BaseService<T, ID extends Serializable> {
 	 * @param id
 	 * @return the entity find
 	 */
-	public T findById(ID id);
+	public DTO findById(ID id);
 
 	/**
 	 * @return a list of entity's
 	 */
-	public List<T> findAll();
+	public List<DTO> findAll();
 
 }

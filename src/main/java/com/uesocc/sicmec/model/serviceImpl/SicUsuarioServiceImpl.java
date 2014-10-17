@@ -3,11 +3,15 @@
  */
 package com.uesocc.sicmec.model.serviceImpl;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uesocc.sicmec.model.adapter.SicUsuarioAdapter;
+import com.uesocc.sicmec.model.dto.SicUsuarioDto;
 import com.uesocc.sicmec.model.entity.SicUsuario;
 import com.uesocc.sicmec.model.repository.SicUsuarioRepository;
 import com.uesocc.sicmec.model.service.SicUsuarioService;
@@ -36,10 +40,13 @@ public class SicUsuarioServiceImpl implements SicUsuarioService {
 	 * @see com.uesocc.framework.general.BaseService#insert(java.lang.Object)
 	 */
 	@Override
-	public SicUsuario insert(SicUsuario entity) 
+	public SicUsuarioDto insert(SicUsuarioDto entity) throws ParseException 
 	{
 		// TODO Auto-generated method stub
-		return this.sicUsuarioRepository.save(entity);
+		SicUsuarioAdapter adp = new SicUsuarioAdapter();
+		SicUsuario obj = adp.dtoToEntity(entity);
+		
+		return adp.entityToDto(this.sicUsuarioRepository.save(obj));
 	}
 
 	/* (non-Javadoc)
@@ -64,12 +71,14 @@ public class SicUsuarioServiceImpl implements SicUsuarioService {
 	 * @see com.uesocc.framework.general.BaseService#findById(java.io.Serializable)
 	 */
 	@Override
-	public SicUsuario findById(Integer id) 
+	public SicUsuarioDto findById(Integer id) 
 	{
 		// TODO Auto-generated method stub
+		SicUsuarioAdapter adp = new SicUsuarioAdapter();
+		
 		if(sicUsuarioRepository.exists(id))
 		{
-			return sicUsuarioRepository.findOne(id);
+			return adp.entityToDto(sicUsuarioRepository.findOne(id));
 		}
 		else
 		{
@@ -81,10 +90,19 @@ public class SicUsuarioServiceImpl implements SicUsuarioService {
 	 * @see com.uesocc.framework.general.BaseService#findAll()
 	 */
 	@Override
-	public List<SicUsuario> findAll() 
+	public List<SicUsuarioDto> findAll() 
 	{
 		// TODO Auto-generated method stub
-		return sicUsuarioRepository.findAll();
+		SicUsuarioAdapter adp = new SicUsuarioAdapter();
+		List<SicUsuario> list = sicUsuarioRepository.findAll();
+		List<SicUsuarioDto> list_dto = new ArrayList<SicUsuarioDto>();
+		
+		for (SicUsuario sicUsuario : list) 
+		{
+			list_dto.add(adp.entityToDto(sicUsuario));
+		}
+		
+		return list_dto;
 	}
 
 }
