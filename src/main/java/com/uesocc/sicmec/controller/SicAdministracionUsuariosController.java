@@ -67,7 +67,7 @@ public class SicAdministracionUsuariosController
 		
 		LOGGER.debug("Creando nuevo usuario");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		SicPersonaDto persona = new SicPersonaDto();
 		persona.setNombre(nombre);
@@ -75,6 +75,7 @@ public class SicAdministracionUsuariosController
 		persona.setEmail(mail);
 		
 		SicUsuarioDto user = new SicUsuarioDto();
+		user.setNombreUsuario(usuario);
 		user.setFxActivacion(simpleformat.format(new Date()));
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.YEAR, 2);
@@ -93,6 +94,46 @@ public class SicAdministracionUsuariosController
 		
 		return "redirect:/admin/usuarios";
 	}
+	
+	@RequestMapping(value="/upUser",method=RequestMethod.POST)
+	public String upUser(
+			@RequestParam(value="id")int id,
+			@RequestParam(value="nombreUp")String nombre,
+			@RequestParam(value="apellidoUp")String apellido,
+			@RequestParam(value="mailUp")String mail,
+			@RequestParam(value="rolUp")int rol,
+			@RequestParam(value="fxAct")String fxAct,
+			@RequestParam(value="fxDes")String fxDes,
+			RedirectAttributes redirectAttributes) throws ParseException
+	{
+		
+		LOGGER.debug("Modificando nuevo usuario");
+		
+		SicUsuarioDto user = sicUsuarioServiceImpl.findById(id);
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		user.setFxActivacion(fxAct);
+		user.setFxDesactivacion(fxDes);
+		
+		user.setModicadoPor("prueba");
+		user.setFxModicado(format.format(new Date()));
+		user.setSicRol(sicRolServiceImpl.findById(rol));
+		
+		SicPersonaDto persona = user.getSicPersona();
+		persona.setNombre(nombre);
+		persona.setApellido(apellido);
+		persona.setEmail(mail);
+		sicPersonaServiceImpl.insert(persona);
+		
+		LOGGER.info(user);
+		sicUsuarioServiceImpl.insert(user);
+		
+		redirectAttributes.addFlashAttribute("upSuccess",true);
+		
+		return "redirect:/admin/usuarios";
+	}
+	
 	
 	@RequestMapping(value="/getUser/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody SicUsuarioDto getUser(@PathVariable(value="id")int id)

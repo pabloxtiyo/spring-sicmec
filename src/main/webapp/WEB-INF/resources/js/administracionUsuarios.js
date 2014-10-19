@@ -54,12 +54,13 @@ $( document ).ready(function() {
 			url:"/sicmec/admin/usuarios/getUser/"+id,
 			success:function(result)
 			{
+				$("#id").val(result.idSicUsuario);
 				$("#nombreUp").val(result.sicPersona.nombre);
 				$("#apellidoUp").val(result.sicPersona.apellido);
 				$("#mailUp").val(result.sicPersona.email);
 				$("#rolUp").val(result.sicRol.idSicRol);
 				$("#fxAct").val(result.fxActivacion);
-				$("#fxDesc").val(result.fxDesactivacion);
+				$("#fxDes").val(result.fxDesactivacion);
 				
 				$("#modalUpdateUsuario").modal("show");
 			},
