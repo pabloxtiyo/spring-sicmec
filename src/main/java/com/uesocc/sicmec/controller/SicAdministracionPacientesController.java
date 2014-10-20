@@ -1,7 +1,5 @@
 package com.uesocc.sicmec.controller;
 import java.text.ParseException;
-import java.util.Date;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,22 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.uesocc.sicmec.model.dto.SicDepartamentoDto;
-import com.uesocc.sicmec.model.dto.SicMunicipioDto;
 import com.uesocc.sicmec.model.dto.SicPacienteDto;
 import com.uesocc.sicmec.model.dto.SicPersonaDto;
-import com.uesocc.sicmec.model.dto.SicUsuarioDto;
-import com.uesocc.sicmec.model.entity.SicDepartamento;
-import com.uesocc.sicmec.model.entity.SicMunicipio;
-import com.uesocc.sicmec.model.entity.SicPaciente;
-import com.uesocc.sicmec.model.entity.SicPersona;
 import com.uesocc.sicmec.model.serviceImpl.SicDepartamentoServiceImpl;
 import com.uesocc.sicmec.model.serviceImpl.SicMunicipioServiceImpl;
 import com.uesocc.sicmec.model.serviceImpl.SicPacienteServiceImpl;
 import com.uesocc.sicmec.model.serviceImpl.SicPersonaServiceImpl;
 import com.uesocc.sicmec.model.serviceImpl.SicRolServiceImpl;
-import com.uesocc.sicmec.model.serviceImpl.SicUsuarioServiceImpl;
 
 /**
  * @author Herber Gómez
