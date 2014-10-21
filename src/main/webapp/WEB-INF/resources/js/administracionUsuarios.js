@@ -27,7 +27,9 @@ $('#agregarUsuarioForm').validate({
 		   },
 		   pass: 
 		   {
-			    required: true
+			    required: true,
+			    maxlength: 10,
+		     	minlength: 6
 		   },
 		   passConfirm: 
 		   {
@@ -56,6 +58,57 @@ $('#agregarUsuarioForm').validate({
 		 
 	});
 	
+$('#modificarUsuarioForm').validate({
+	errorElement: "span",
+	rules: {
+		nombreUp: 
+	   {
+	     	required: true,
+	     	maxlength: 20,
+	     	minlength: 3
+	   },
+	   apellidoUp: 
+	   {
+	        required: true,
+	        maxlength: 20,
+	     	minlength: 3
+	   },
+	   usuario: 
+	   {
+		    required: true,
+		    maxlength: 10,
+	     	minlength: 3
+	   },
+	   mailUp: 
+	   {
+		    required: true,
+		    email: true
+	   },
+	   rolUp:
+	   {
+		   required: true
+	   },
+	   fxAct:
+	   {
+		   required: true
+	   },
+	   fxDes:
+	   {
+		   required: true
+	   }
+	  },
+	highlight: function(element) {
+		$(element).closest('.form-group')
+		.removeClass('has-success').addClass('has-error');
+	},
+	success: function(element) {
+		element.addClass('help-inline')
+		.closest('.form-group')
+		.removeClass('has-error').addClass('has-success');
+	}
+	 
+});
+
 	$(".datatables").DataTable({
 		"scrollY": "350px",
         "scrollCollapse": false,
