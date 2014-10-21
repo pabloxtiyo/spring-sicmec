@@ -3,7 +3,59 @@
  */
 
 $( document ).ready(function() {
-  
+	
+$('#agregarUsuarioForm').validate({
+		errorElement: "span",
+		rules: {
+		   nombre: 
+		   {
+		     	required: true,
+		     	maxlength: 20,
+		     	minlength: 3
+		   },
+		   apellido: 
+		   {
+		        required: true,
+		        maxlength: 20,
+		     	minlength: 3
+		   },
+		   usuario: 
+		   {
+			    required: true,
+			    maxlength: 10,
+		     	minlength: 3
+		   },
+		   pass: 
+		   {
+			    required: true
+		   },
+		   passConfirm: 
+		   {
+			    required: true,
+			    equalTo: pass
+		   },
+		   mail: 
+		   {
+			    required: true,
+			    email: true
+		   },
+		   rol:
+		   {
+			   required: true
+		   }
+		  },
+		highlight: function(element) {
+			$(element).closest('.form-group')
+			.removeClass('has-success').addClass('has-error');
+		},
+		success: function(element) {
+			element.addClass('help-inline')
+			.closest('.form-group')
+			.removeClass('has-error').addClass('has-success');
+		}
+		 
+	});
+	
 	$(".datatables").DataTable({
 		"scrollY": "350px",
         "scrollCollapse": false,
