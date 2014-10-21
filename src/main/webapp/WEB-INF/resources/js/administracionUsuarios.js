@@ -22,8 +22,18 @@ $('#agregarUsuarioForm').validate({
 		   usuario: 
 		   {
 			    required: true,
-			    maxlength: 10,
-		     	minlength: 3
+			    maxlength: 20,
+		     	minlength: 3,
+		     	remote: 
+		     	{
+		    		type: "POST",
+		    		url: "/sicmec/Utils/validarUsername",
+	                	data : 
+	                	{
+	                        usuario: function() 
+	                        { return $("#usuario").val(); }
+	                	}
+		     	}
 		   },
 		   pass: 
 		   {
@@ -46,6 +56,13 @@ $('#agregarUsuarioForm').validate({
 			   required: true
 		   }
 		  },
+		messages : 
+		{
+			usuario:
+			{
+				remote : "Este usuario ya existe."
+			}
+		},
 		highlight: function(element) {
 			$(element).closest('.form-group')
 			.removeClass('has-success').addClass('has-error');
@@ -71,12 +88,6 @@ $('#modificarUsuarioForm').validate({
 	   {
 	        required: true,
 	        maxlength: 20,
-	     	minlength: 3
-	   },
-	   usuario: 
-	   {
-		    required: true,
-		    maxlength: 10,
 	     	minlength: 3
 	   },
 	   mailUp: 
