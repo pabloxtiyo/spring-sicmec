@@ -51,6 +51,7 @@ $('#agregarUsuarioForm').validate({
 			    required: true,
 			    email: true
 		   },
+		   
 		   rol:
 		   {
 			   required: true
