@@ -78,4 +78,19 @@ public class SicMunicipioServiceImpl implements SicMunicipioService{
 		
 		return list_dto;
 	}
+
+	@Override
+	public List<SicMunicipioDto> getMunicipiosPorDepartamento(int idDepartamento) {
+		// TODO Auto-generated method stub
+		SicMunicipioAdapter adp = new SicMunicipioAdapter();
+		List<SicMunicipio> list = sicMunicipioRepository.findAllByfkSicDepartamento_idSicDepartamento(idDepartamento);
+		List<SicMunicipioDto> list_dto = new ArrayList<SicMunicipioDto>();
+		
+		for (SicMunicipio sicMunicipio : list) 
+		{
+			list_dto.add(adp.entityToDto(sicMunicipio));
+		}
+		
+		return list_dto;
+	}
 }

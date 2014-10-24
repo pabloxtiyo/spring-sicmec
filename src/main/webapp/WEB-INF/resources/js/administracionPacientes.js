@@ -3,7 +3,94 @@
  */
 
 $( document ).ready(function() {
-  
+	$('#agregarPacienteForm').validate({
+		errorElement: "span",
+		rules: {
+		   nombres: 
+		   {
+		     	required: true,
+		     	maxlength: 20,
+		     	minlength: 3
+		   },
+		   apellidos: 
+		   {
+		        required: true,
+		        maxlength: 20,
+		     	minlength: 3
+		   },
+		   mail: 
+		   {
+			    required: true,
+			    email: true
+		   },
+		   fnacimiento:
+		   {
+			   required: true
+		   },
+		   telefono:
+		   {
+			   required: true
+		   },
+		   direccion:
+		   {
+			   required: true
+		   }
+		  },
+		highlight: function(element) {
+			$(element).closest('.form-group')
+			.removeClass('has-success').addClass('has-error');
+		},
+		success: function(element) {
+			element.addClass('help-inline')
+			.closest('.form-group')
+			.removeClass('has-error').addClass('has-success');
+		}
+		 
+	});
+	$('#modificarPacienteForm').validate({
+		errorElement: "span",
+		rules: {
+		   nombresUp: 
+		   {
+		     	required: true,
+		     	maxlength: 20,
+		     	minlength: 3
+		   },
+		   apellidosUp: 
+		   {
+		        required: true,
+		        maxlength: 20,
+		     	minlength: 3
+		   },
+		   mailUp: 
+		   {
+			    required: true,
+			    email: true
+		   },
+		   fnacimientoUp:
+		   {
+			   required: true
+		   },
+		   telefonoUp:
+		   {
+			   required: true
+		   },
+		   direccionUp:
+		   {
+			   required: true
+		   }
+		  },
+		highlight: function(element) {
+			$(element).closest('.form-group')
+			.removeClass('has-success').addClass('has-error');
+		},
+		success: function(element) {
+			element.addClass('help-inline')
+			.closest('.form-group')
+			.removeClass('has-error').addClass('has-success');
+		}
+		 
+	});
 	$(".datatables").DataTable({
 		"scrollY":        "250px",
         "scrollCollapse": true,
@@ -69,5 +156,23 @@ $(".onUpdate").click(function(){
 	    }
 	});
 });
+
+$(".onUpdateMuni").click(function(){
+	var id = $(this).data("id");
+	alert(id);
 	
+	$.ajax
+	({
+		type: "GET",
+		url:"/sicmec/admin/pacientes/getMunicipios/"+id,
+		success:function(result)
+		{
+			$("#municipio").val(result.getMunicipiosPorDepartamento);
+		},
+		error: function (xhr, ajaxOptions, thrownError) 
+		{
+			alert("unable to find server..")
+	    }
+	});
+});
 });

@@ -1,5 +1,7 @@
 package com.uesocc.sicmec.controller;
 import java.text.ParseException;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.uesocc.sicmec.model.dto.SicMunicipioDto;
 import com.uesocc.sicmec.model.dto.SicPacienteDto;
 import com.uesocc.sicmec.model.dto.SicPersonaDto;
 import com.uesocc.sicmec.model.serviceImpl.SicDepartamentoServiceImpl;
@@ -131,12 +135,10 @@ public class SicAdministracionPacientesController {
 					
 			LOGGER.info(pac_search);
 			sicPacienteServiceImpl.insert(pac_search);
+			redirectAttributes.addFlashAttribute("Upsuccess",true);
 		} else {
-			System.out.println("ERROR");
+			LOGGER.info("Error al actualizar paciente");
 		}
-		
-		
-		redirectAttributes.addFlashAttribute("success",true);
 		
 		return "redirect:/admin/pacientes";
 	}
@@ -146,5 +148,15 @@ public class SicAdministracionPacientesController {
 	public @ResponseBody SicPacienteDto getPaciente(@PathVariable(value="id")int id)
 	{
 		return sicPacienteServiceImpl.findById(id);
+	}
+
+	@RequestMapping(value="/getMunicipios/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<SicMunicipioDto> getMunicipiosPorDepartamento(@PathVariable(value="id")int id)
+	{
+		List<SicMunicipioDto> lst = sicMunicipioServiceImpl.getMunicipiosPorDepartamento(id);
+		for(SicMunicipioDto dto :lst){
+			System.out.println(dto);
+		}
+		return lst;
 	}
 }

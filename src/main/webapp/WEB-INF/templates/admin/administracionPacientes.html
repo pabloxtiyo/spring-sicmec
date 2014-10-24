@@ -27,6 +27,14 @@
   					<p th:utext="#{admin.pacientes.alertas.agregar.exito}"></p>
 				</div>
 			</div>	
+			<div th:if="${upSuccess}" class="alert alert-info alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert">
+  						<span aria-hidden="true">&times;</span>
+  						<span class="sr-only">Close</span>
+  					</button>
+  					<strong th:utext="#{general.alerta.atencion}"></strong>
+  					<p th:utext="#{admin.pacientes.alertas.modificar.exito}"></p>
+		   </div>
 		</div>
 		
 		<div class="row">
@@ -84,7 +92,7 @@
 	<div class="modal fade" id="modalAgregarPaciente" tabindex="-1" role="dialog" aria-labelledby="modalAgregarPaciente" aria-hidden="true">
   	<div class="modal-dialog">
     	<div class="modal-content">
-      		<form th:action="@{/admin/pacientes/addPaciente}" method="post" >
+      		<form id="agregarPacienteForm" th:action="@{/admin/pacientes/addPaciente}" method="post" >
       		    <div class="modal-header">
         			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         			<h4 class="modal-title" th:text="#{admin.pacientes.addmodal.titulo}"></h4>
@@ -122,8 +130,8 @@
         		<div class="row">
 		          <div class="col-md-5 col-xs-2">
         			<label for="departamento" th:utext="#{admin.pacientes.departamento}"></label>
-    				<select class="form-control" id="departamento" name="departamento">
-    				   <option th:each="departamento:${departamentos}" th:value="${departamento.idSicDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
+    				<select class="form-control" id="departamento" name="departamento" >
+    				   <option class="onUpdateMuni" th:each="departamento:${departamentos}" th:attr="data-id=${departamento.idSicDepartamento}"  th:value="${departamento.idSicDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
     				</select>
         		  </div>
         		  <div class="col-md-5">
@@ -158,16 +166,16 @@
     <div class="modal fade" id="modalUpdatePaciente" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePaciente" aria-hidden="true">
   	<div class="modal-dialog">
     	<div class="modal-content">
-      		<form th:action="@{/admin/pacientes/upPaciente}" method="post" >
+      		<form id="modificarPacienteForm" th:action="@{/admin/pacientes/upPaciente}" method="post" >
       			
       		    <div class="modal-header">
         			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         			<h4 class="modal-title" th:text="#{admin.pacientes.upmodal.titulo}"></h4>
       			</div>
       			<div class="modal-body">
-      			<div class="form-group" hidden="true">
-    				<input type="text" class="form-control" id="idUp" name="idUp" />
-        		</div>
+      			
+      			<input type="text" id="idUp" name="idUp" style="display: none;"/>
+      			
         		<div class="form-group">
         			<label for="nombresUp" th:text="#{admin.pacientes.nombres}"></label>
     				<input type="text" class="form-control" id="nombresUp" name="nombresUp" th:placeholder="#{admin.pacientes.nombres}" />
