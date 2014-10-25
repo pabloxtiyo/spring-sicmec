@@ -131,13 +131,14 @@
 		          <div class="col-md-5 col-xs-2">
         			<label for="departamento" th:utext="#{admin.pacientes.departamento}"></label>
     				<select class="form-control" id="departamento" name="departamento" >
-    				   <option class="onUpdateMuni" th:each="departamento:${departamentos}" th:attr="data-id=${departamento.idSicDepartamento}"  th:value="${departamento.idSicDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
+    					<option></option>
+    				   <option th:each="departamento:${departamentos}" th:attr="data-id=${departamento.idSicDepartamento}"  th:value="${departamento.idSicDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
     				</select>
         		  </div>
         		  <div class="col-md-5">
         			<label for="municipio" th:utext="#{admin.pacientes.municipio}"></label>
     				<select class="form-control" id="municipio" name="municipio">
-    					<option th:each="municipio:${municipios}" th:value="${municipio.idSicMunicipio}" th:text="${municipio.nombreMunicipio}"></option> 
+    					 
     				</select>				
         		  </div>
         		 </div>
@@ -215,7 +216,7 @@
         		  <div class="col-md-5">
         			<label for="municipioUp" th:utext="#{admin.pacientes.municipio}"></label>
     				<select class="form-control" id="municipioUp" name="municipioUp">
-    					<option th:each="municipio:${municipios}" th:value="${municipio.idSicMunicipio}" th:text="${municipio.nombreMunicipio}"></option> 
+    					 <option th:each="municipio:${municipios}" th:value="${municipio.idSicMunicipio}" th:text="${municipio.nombreMunicipio}"></option>
     				</select>				
         		  </div>
         		 </div>

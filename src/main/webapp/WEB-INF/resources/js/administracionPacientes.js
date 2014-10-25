@@ -147,7 +147,9 @@ $(".onUpdate").click(function(){
 			$("#telefonoUp").val(result.telefonoPaciente);
 		//	$("#sexoUp").val(result.sexoPaciente);
 			$("#direccionUp").val(result.direccionPaciente);
-			$("#fnacimientoUp").val(result.fxNacimiento);;
+			$("#fnacimientoUp").val(result.fxNacimiento);
+			$("#departamentoUp").val(result.SicMunicipioDto.SicDepartamentoDto.idSicDepartamento);
+			$("#municipioUp").val(result.SicMunicipioDto.idSicMunicipio);
 			$("#modalUpdatePaciente").modal("show");
 		},
 		error: function (xhr, ajaxOptions, thrownError) 
@@ -157,9 +159,9 @@ $(".onUpdate").click(function(){
 	});
 });
 
-$(".onUpdateMuni").click(function(){
-	var id = $(this).data("id");
-	alert(id);
+$("#departamento").change(function()
+{
+	var id = $("#departamento").val();
 	
 	$.ajax
 	({
@@ -167,12 +169,35 @@ $(".onUpdateMuni").click(function(){
 		url:"/sicmec/admin/pacientes/getMunicipios/"+id,
 		success:function(result)
 		{
-			$("#municipio").val(result.getMunicipiosPorDepartamento);
+			$("#municipio option").remove();
+			
+			for (var int = 0; int < result.length; int++) 
+			{
+				createMunList(result[int]);
+			}
+			//$("#municipio").val(result.getMunicipiosPorDepartamento);
 		},
 		error: function (xhr, ajaxOptions, thrownError) 
 		{
-			alert("unable to find server..")
+			alert("unable to find server..");
+			$("#municipio option").remove();
 	    }
 	});
+	
 });
+
+function createMunList(mun)
+{
+	var select = document.getElementById("municipio");
+	var option = document.createElement("option");
+	var text =  document.createTextNode(mun.nombreMunicipio);
+	option.setAttribute("value",mun.idSicMunicipio);
+	
+	option.appendChild(text);
+	select.appendChild(option);
+	
+};
+
+
+
 });
