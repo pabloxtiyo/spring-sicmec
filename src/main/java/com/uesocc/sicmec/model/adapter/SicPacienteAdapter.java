@@ -22,6 +22,7 @@ public class SicPacienteAdapter implements
 		// TODO Auto-generated method stub
 		SicPersonaAdapter adp = new SicPersonaAdapter();
 		SicMunicipioAdapter adpm = new SicMunicipioAdapter();
+		SicEstadoPacienteAdapter adpa = new SicEstadoPacienteAdapter();
 		
 		SicPaciente entidad = new SicPaciente();
 		entidad.setIdSicPaciente((obj.getIdSicPaciente()!=null)? SicDataTypeFormat.toIntValue(obj.getIdSicPaciente()):null);
@@ -33,6 +34,7 @@ public class SicPacienteAdapter implements
 		
 		entidad.setFkSicPersona(adp.dtoToEntity(obj.getFkSicPersona()));
 		entidad.setFkSicMunicipio(adpm.dtoToEntity(obj.getFkSicMunicipio()));
+		entidad.setFkSicEstadoPaciente(adpa.dtoToEntity(obj.getFkSicEstadoPaciente()));
 		return entidad;
 	}
 
@@ -41,6 +43,7 @@ public class SicPacienteAdapter implements
 		SimpleDateFormat normalFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SicPersonaAdapter adp = new SicPersonaAdapter();
 		SicMunicipioAdapter adpm = new SicMunicipioAdapter();
+		SicEstadoPacienteAdapter adpa = new SicEstadoPacienteAdapter();
 		
 		SicPacienteDto dto = new SicPacienteDto();
 		dto.setIdSicPaciente((obj.getIdSicPaciente()!=null)?SicDataTypeFormat.toStringValue(obj.getIdSicPaciente().toString()):"");
@@ -52,7 +55,7 @@ public class SicPacienteAdapter implements
 		
 		dto.setFkSicPersona(adp.entityToDto(obj.getFkSicPersona()));
 		dto.setFkSicMunicipio(adpm.entityToDto(obj.getFkSicMunicipio()));
-		
+		dto.setFkSicEstadoPaciente(adpa.entityToDto(obj.getFkSicEstadoPaciente()));
 		return dto;
 	}
 
