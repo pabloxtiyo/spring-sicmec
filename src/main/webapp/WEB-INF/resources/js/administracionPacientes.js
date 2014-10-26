@@ -127,12 +127,15 @@ $( document ).ready(function() {
                 "oAria": {
                     "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
+                } ,
+                "fnDrawCallback": function( oSettings ) {},
             }   
 	});
 
 $(".onUpdate").click(function(){
 	var id = $(this).data("id");
+	//alert(id);
+	
 	$.ajax
 	({
 		type: "GET",
