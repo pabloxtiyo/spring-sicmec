@@ -54,6 +54,7 @@
 									<th></th>
 									<th th:text="#{admin.pacientes.nombres}"></th>
 									<th th:text="#{admin.pacientes.apellidos}"></th>
+									<th th:text="#{admin.pacientes.departamento}"></th>
 									<th th:text="#{admin.pacientes.municipio}"></th>
 									<th th:text="#{admin.pacientes.telefono}"></th>
 									<th th:utext="#{admin.pacientes.sexo}"></th>
@@ -64,18 +65,18 @@
 							 <tr th:each="paciente : ${pacientes}">
 							       <td>
 										<div class="btn-group">
-  											<button type="button" class="btn btn-danger"
+  										<!--<button type="button" class="btn btn-danger onDelete "
   											    data-id="${paciente.idSicPaciente}">
   												<i class="fa fa-trash-o"></i>
-  											</button>
+  											</button>-->
    											<button type="button" class="btn btn-default onUpdate" th:attr="data-id=${paciente.idSicPaciente}">
-   												<!-- data-toggle="modal" data-target="#modalAgregarUsuario" -->
    												<i class="fa fa-pencil-square-o"></i>
    											</button>
 										</div>
 									</td>																
 								 <td th:text="${paciente.fkSicPersona.nombre}"></td>
 								 <td th:text="${paciente.fkSicPersona.apellido}"></td>
+								 <td th:text="${paciente.fkSicMunicipio.fkSicDepartamento.nombreDepartamento}"></td>
 								 <td th:text="${paciente.fkSicMunicipio.nombreMunicipio}"></td>
 								 <td th:text="${paciente.telefonoPaciente}"></td>
 								 <td th:text="${paciente.sexoPaciente}"></td>
@@ -200,8 +201,8 @@
         			<label for="sexoUp" th:utext="#{admin.pacientes.sexo}"></label>
     				<select class="form-control" id="sexoUp" name="sexoUp">
     					<!-- <option th:each="rol:${roles}" th:value="${rol.idSicRol}" th:text="${rol.nombreRol}"></option> -->
-    				    <option th:text="Masculino"></option>
-    				    <option th:text="Femenino"></option>
+    				    <option value="Masculino" th:text="Masculino"></option>
+    				    <option value="Femenino" th:text="Femenino"></option>
     				</select>				
         		  </div>
         		 </div>
@@ -209,14 +210,15 @@
         		<div class="row">
 		          <div class="col-md-5 col-xs-2">
         			<label for="departamentoUp" th:utext="#{admin.pacientes.departamento}"></label>
-    				<select class="form-control" id="departamentoUp" name="departamentoUp">
-    				   <option th:each="departamento:${departamentos}" th:value="${departamento.idSicDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
+    				<select class="form-control" id="departamentoUp" name="departamentoUp" >
+    					<option></option>
+    				   <option th:each="departamento:${departamentos}" th:attr="data-id=${departamento.idSicDepartamento}"  th:value="${departamento.idSicDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
     				</select>
         		  </div>
         		  <div class="col-md-5">
         			<label for="municipioUp" th:utext="#{admin.pacientes.municipio}"></label>
     				<select class="form-control" id="municipioUp" name="municipioUp">
-    					 <option th:each="municipio:${municipios}" th:value="${municipio.idSicMunicipio}" th:text="${municipio.nombreMunicipio}"></option>
+    					 
     				</select>				
         		  </div>
         		 </div>
@@ -239,7 +241,6 @@
     	</div>
     </div>
     </div>	
-    
     
 	<div th:replace="fragments/general :: footerFragment"></div>
 	<div th:replace="fragments/general :: jsFragment"></div>

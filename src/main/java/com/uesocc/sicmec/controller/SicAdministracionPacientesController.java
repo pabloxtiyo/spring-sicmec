@@ -154,10 +154,6 @@ public class SicAdministracionPacientesController {
 	public @ResponseBody List<SicMunicipioDto> getMunicipiosPorDepartamento(@PathVariable(value="id")int id)
 	{
 		List<SicMunicipioDto> lst = sicMunicipioServiceImpl.getMunicipiosPorDepartamento(id);
-		
-		for(SicMunicipioDto dto :lst){
-			System.out.println(dto);
-		}
 		return lst;
 	}
 }

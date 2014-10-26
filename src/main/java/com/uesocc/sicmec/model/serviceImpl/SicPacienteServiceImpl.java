@@ -70,6 +70,12 @@ public class SicPacienteServiceImpl implements SicPacienteService  {
 		
 		for (SicPaciente sicPaciente : list) 
 		{
+			String sexo=sicPaciente.getSexoPaciente();
+			if (sexo.equals("M")){
+				sicPaciente.setSexoPaciente("Masculino");
+			} else {
+				sicPaciente.setSexoPaciente("Femenino");
+			}
 			list_dto.add(adp.entityToDto(sicPaciente));
 		}
 		

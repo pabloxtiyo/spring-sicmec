@@ -96,12 +96,13 @@ $( document ).ready(function() {
         "scrollCollapse": true,
         "aoColumns": 
         	[
-        	 { "sWidth": "10%", "sClass": "center", "bSortable": false },
+        	 { "sWidth": "5%", "sClass": "center", "bSortable": false },
         	 { "sWidth": "10%" },
         	 { "sWidth": "10%" },
         	 { "sWidth": "10%" },
         	 { "sWidth": "10%" },
         	 { "sWidth": "10%" },
+        	 { "sWidth": "5%" },
         	 { "sWidth": "10%" },
             ],
             language: {
@@ -132,8 +133,6 @@ $( document ).ready(function() {
 
 $(".onUpdate").click(function(){
 	var id = $(this).data("id");
-	//alert(id);
-	
 	$.ajax
 	({
 		type: "GET",
@@ -145,11 +144,22 @@ $(".onUpdate").click(function(){
 			$("#apellidosUp").val(result.fkSicPersona.apellido);
 			$("#mailUp").val(result.fkSicPersona.email);
 			$("#telefonoUp").val(result.telefonoPaciente);
-		//	$("#sexoUp").val(result.sexoPaciente);
+			var sexo=result.sexoPaciente;
+			var val="";
+			if (sexo=="M"){
+				val="Masculino";
+			} else {
+				if (sexo=="F"){
+					val="Femenino";
+				}
+			}
+			$("#sexoUp").val(val);
 			$("#direccionUp").val(result.direccionPaciente);
 			$("#fnacimientoUp").val(result.fxNacimiento);
-			$("#departamentoUp").val(result.SicMunicipioDto.SicDepartamentoDto.idSicDepartamento);
-			$("#municipioUp").val(result.SicMunicipioDto.idSicMunicipio);
+			var idMuni= result.fkSicMunicipio.idSicMunicipio;
+			var idDepa= result.fkSicMunicipio.fkSicDepartamento.idSicDepartamento;
+			getMuniByDep(idDepa,idMuni);
+			$("#departamentoUp").val(result.fkSicMunicipio.fkSicDepartamento.idSicDepartamento);
 			$("#modalUpdatePaciente").modal("show");
 		},
 		error: function (xhr, ajaxOptions, thrownError) 
@@ -158,7 +168,6 @@ $(".onUpdate").click(function(){
 	    }
 	});
 });
-
 $("#departamento").change(function()
 {
 	var id = $("#departamento").val();
@@ -175,7 +184,6 @@ $("#departamento").change(function()
 			{
 				createMunList(result[int]);
 			}
-			//$("#municipio").val(result.getMunicipiosPorDepartamento);
 		},
 		error: function (xhr, ajaxOptions, thrownError) 
 		{
@@ -185,7 +193,30 @@ $("#departamento").change(function()
 	});
 	
 });
-
+$("#departamentoUp").change(function()
+		{
+			var id = $("#departamentoUp").val();
+			$.ajax
+			({
+				type: "GET",
+				url:"/sicmec/admin/pacientes/getMunicipios/"+id,
+				success:function(result)
+				{
+					$("#municipioUp option").remove();
+					
+					for (var int = 0; int < result.length; int++) 
+					{
+						createMunListUp(result[int]);
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) 
+				{
+					alert("unable to find server..");
+					$("#municipio option").remove();
+			    }
+			});
+			
+	});
 function createMunList(mun)
 {
 	var select = document.getElementById("municipio");
@@ -197,7 +228,36 @@ function createMunList(mun)
 	select.appendChild(option);
 	
 };
-
-
-
+function createMunListUp(mun)
+{
+	var select = document.getElementById("municipioUp");
+	var option = document.createElement("option");
+	var text =  document.createTextNode(mun.nombreMunicipio);
+	option.setAttribute("value",mun.idSicMunicipio);	
+	option.appendChild(text);
+	select.appendChild(option);
+    
+};
+function getMuniByDep(idDepa,idMuni){
+	$.ajax
+	({
+		type: "GET",
+		url:"/sicmec/admin/pacientes/getMunicipios/"+idDepa,
+		success:function(result)
+		{
+			$("#municipioUp option").remove();
+			
+			for (var int = 0; int < result.length; int++) 
+			{
+				createMunListUp(result[int]);
+			}
+			$("#municipioUp").val(idMuni);
+		},
+		error: function (xhr, ajaxOptions, thrownError) 
+		{
+			alert("unable to find server..");
+			$("#municipio option").remove();
+	    }
+	});
+};
 });
