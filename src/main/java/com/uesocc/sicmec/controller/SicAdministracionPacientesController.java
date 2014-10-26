@@ -58,7 +58,7 @@ public class SicAdministracionPacientesController {
 	public String addUser(
 			@RequestParam(value="nombres")String nombres,
 			@RequestParam(value="apellidos")String apellidos,
-			@RequestParam(value="estado")int idEstado,
+			@RequestParam(value="estado")String estado,
 			@RequestParam(value="sexo")String sexo,
 			@RequestParam(value="municipio")int idmunicipio,
 			@RequestParam(value="departamento")int iddepartamento,
@@ -86,7 +86,7 @@ public class SicAdministracionPacientesController {
 		paciente.setSexoPaciente(sex);
 		paciente.setTelefonoPaciente(telefono);
 		paciente.setFxNacimiento(fechaNacimiento);
-		paciente.setFkSicEstadoPaciente(sicEstadoPacienteServiceImpl.findById(idEstado));
+		paciente.setFkSicEstadoPaciente(sicEstadoPacienteServiceImpl.findOneByDescripcion(estado));
 		paciente.setFkSicPersona(sicPersonaServiceImpl.insert(persona));
 		paciente.setFkSicMunicipio(sicMunicipioServiceImpl.findById(idmunicipio));
 		
