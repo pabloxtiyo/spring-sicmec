@@ -40,8 +40,6 @@ public class SicEstadoPaciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion", nullable = false, length = 50)
     private String descripcion;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "sicEstadoPaciente")
-    private SicPaciente sicPaciente;
 
     public SicEstadoPaciente() {
     }
@@ -69,14 +67,6 @@ public class SicEstadoPaciente implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public SicPaciente getSicPaciente() {
-        return sicPaciente;
-    }
-
-    public void setSicPaciente(SicPaciente sicPaciente) {
-        this.sicPaciente = sicPaciente;
     }
 
     @Override

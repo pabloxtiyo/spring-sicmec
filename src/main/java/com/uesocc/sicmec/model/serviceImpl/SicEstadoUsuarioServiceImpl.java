@@ -76,6 +76,7 @@ public class SicEstadoUsuarioServiceImpl implements SicEstadoUsuarioService {
 	@Override
 	public SicEstadoUsuarioDto findOneByDescripcion(String Descripcion) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
