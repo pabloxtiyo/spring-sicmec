@@ -187,5 +187,31 @@ $('#modificarUsuarioForm').validate({
 		    }
 		});
 	});
+	
+	$(".onDelete").click(function(){
+		var id = $(this).data("id");
+		
+		$("#AreYouSureConfirm").attr("href","/sicmec/admin/usuarios/delUser/"+id);
+		$("#modalEliminarUsuario").modal('show');
+		
+	});
+	
+	
 		
 });
+
+function onDeleteValidate()
+{
+	if($("#okdelete").is(':checked'))
+	{
+		$("#AreYouSureConfirm").removeAttr("onclick");
+		$("#AreYouSureConfirm").addClass("btn-primary");
+		
+	}
+	else
+	{
+		$("#AreYouSureConfirm").attr("href","#");
+		$("#AreYouSureConfirm").attr("onclick","return false;");
+		$("#AreYouSureConfirm").removeClass("btn-primary");
+	}
+};

@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -141,4 +142,40 @@ public class SicAdministracionUsuariosController
 	{
 		return sicUsuarioServiceImpl.findById(id);
 	}
+	
+	@RequestMapping(value="/delUser/{id}",method=RequestMethod.GET)
+	public String delUser(@PathVariable(value="id")int id,RedirectAttributes redirectAttributes)
+	{
+		
+		try
+		{
+			SicUsuarioDto user = sicUsuarioServiceImpl.findById(id); 
+				if(user.getSicEstadoUsuario().getDescripcion().equals("Activo"))
+				{
+					user.setSicEstadoUsuario(sicEstadoUsuarioServiceImpl.findOneByDescripcion("Inactivo"));
+					sicUsuarioServiceImpl.insert(user);
+					redirectAttributes.addFlashAttribute("deleteSuccess",true);
+				}
+				else
+				{
+					redirectAttributes.addFlashAttribute("deleteError",true);
+					redirectAttributes.addFlashAttribute("deleteMessage","Este usuario ya se encuentra desactivado");
+				}
+				
+				return "redirect:/admin/usuarios";
+		}
+		catch (Exception ex)
+		{
+			
+			LOGGER.error("Error al desactivar usuario ");
+			LOGGER.error("ERROR "+ex.getMessage());
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("deleteError",true);
+			redirectAttributes.addFlashAttribute("deleteMessage","Error al bloquear usuario");
+			
+			return "redirect:/admin/usuarios";
+			
+		}
+	}
+	
 }
