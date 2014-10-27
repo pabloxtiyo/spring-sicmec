@@ -24,7 +24,7 @@ public class SicPacienteAdapter implements
 		SicPersonaAdapter adp = new SicPersonaAdapter();
 		SicMunicipioAdapter adpm = new SicMunicipioAdapter();
 		SicEstadoPacienteAdapter adpa = new SicEstadoPacienteAdapter();
-		SicEstadoPaciente estado= adpa.dtoToEntity(obj.getFkSicEstadoPaciente());
+		
 		SicPaciente entidad = new SicPaciente();
 		entidad.setIdSicPaciente((obj.getIdSicPaciente()!=null)? SicDataTypeFormat.toIntValue(obj.getIdSicPaciente()):null);
 		//entidad.setFkExpediente((obj.getFkExpediente()!=null)?SicDataTypeFormat.toIntValue(obj.getFkExpediente()):null);
@@ -32,10 +32,10 @@ public class SicPacienteAdapter implements
 		entidad.setTelefonoPaciente((obj.getTelefonoPaciente()!=null)?SicDataTypeFormat.toStringValue(obj.getTelefonoPaciente()):"");
 		entidad.setSexoPaciente((obj.getSexoPaciente()!=null)?SicDataTypeFormat.toStringValue(obj.getSexoPaciente()):"");
 		entidad.setFxNacimiento((obj.getFxNacimiento()!=null)?SicDataTypeFormat.toDateValue(obj.getFxNacimiento()):new Date());
-		
 		entidad.setFkSicPersona(adp.dtoToEntity(obj.getFkSicPersona()));
 		entidad.setFkSicMunicipio(adpm.dtoToEntity(obj.getFkSicMunicipio()));
-    	entidad.setSicEstadoPaciente(estado);
+    	entidad.setFkSicEstadoPaciente(adpa.dtoToEntity(obj.getFkSicEstadoPaciente()));
+    	
 		return entidad;
 	}
 
@@ -56,7 +56,8 @@ public class SicPacienteAdapter implements
 		
 		dto.setFkSicPersona(adp.entityToDto(obj.getFkSicPersona()));
 		dto.setFkSicMunicipio(adpm.entityToDto(obj.getFkSicMunicipio()));
-		dto.setFkSicEstadoPaciente(adpa.entityToDto(obj.getSicEstadoPaciente()));
+		dto.setFkSicEstadoPaciente(adpa.entityToDto(obj.getFkSicEstadoPaciente()));
+		
 		return dto;
 	}
 

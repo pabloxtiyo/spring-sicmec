@@ -66,20 +66,6 @@ public class SicPaciente implements Serializable {
     @JoinColumn(name = "fk_sic_tipo_patologia", referencedColumnName = "id_sic_tipo_patologia")
     @ManyToOne
     private SicTipoPatologia fkSicTipoPatologia;
-    /**
-	 * @return the sicEstadoPaciente
-	 */
-	public SicEstadoPaciente getSicEstadoPaciente() {
-		return sicEstadoPaciente;
-	}
-
-	/**
-	 * @param sicEstadoPaciente the sicEstadoPaciente to set
-	 */
-	public void setSicEstadoPaciente(SicEstadoPaciente sicEstadoPaciente) {
-		this.sicEstadoPaciente = sicEstadoPaciente;
-	}
-
 	@JoinColumn(name = "fk_sic_persona", referencedColumnName = "id_sic_persona", nullable = false)
     @ManyToOne(optional = false)
     private SicPersona fkSicPersona;
@@ -88,8 +74,9 @@ public class SicPaciente implements Serializable {
     private SicMunicipio fkSicMunicipio;
     @JoinColumn(name = "fk_sic_estado_paciente", referencedColumnName = "id_sic_estado_paciente", nullable = false)
     @ManyToOne(optional = false)
-    private SicEstadoPaciente sicEstadoPaciente;
-
+    private SicEstadoPaciente fkSicEstadoPaciente;
+    
+    
     public SicPaciente() {
     }
 
@@ -208,5 +195,19 @@ public class SicPaciente implements Serializable {
     public String toString() {
         return "com.uesocc.sicmec.model.entity.SicPaciente[ idSicPaciente=" + idSicPaciente + " ]";
     }
+
+	/**
+	 * @return the fkSicEstadoPaciente
+	 */
+	public SicEstadoPaciente getFkSicEstadoPaciente() {
+		return fkSicEstadoPaciente;
+	}
+
+	/**
+	 * @param fkSicEstadoPaciente the fkSicEstadoPaciente to set
+	 */
+	public void setFkSicEstadoPaciente(SicEstadoPaciente fkSicEstadoPaciente) {
+		this.fkSicEstadoPaciente = fkSicEstadoPaciente;
+	}
     
 }
