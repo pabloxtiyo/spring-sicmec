@@ -48,9 +48,8 @@ public class SicPaciente implements Serializable {
     @Column(name = "id_sic_paciente", nullable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSicPaciente;
-    @Basic(optional = false)
-    @Column(name = "fk_expediente", nullable = false)
-    private int fkExpediente;
+    @Column(name = "numero_expediente")
+    private String numeroExpediente;
     @Basic(optional = false)
     @Column(name = "telefono_paciente", nullable = false, length = 10)
     private String telefonoPaciente;
@@ -75,7 +74,11 @@ public class SicPaciente implements Serializable {
     @JoinColumn(name = "fk_sic_estado_paciente", referencedColumnName = "id_sic_estado_paciente", nullable = false)
     @ManyToOne(optional = false)
     private SicEstadoPaciente fkSicEstadoPaciente;
-    
+    @Column(name = "dui_paciente")
+    private String duiPaciente;
+    @JoinColumn(name = "fk_sic_contacto_paciente", referencedColumnName = "id_sic_contacto_paciente")
+    @ManyToOne
+    private SicContactoPaciente fkSicContactoPaciente;
     
     public SicPaciente() {
     }
@@ -84,9 +87,8 @@ public class SicPaciente implements Serializable {
         this.idSicPaciente = idSicPaciente;
     }
 
-    public SicPaciente(Integer idSicPaciente, int fkExpediente, String telefonoPaciente) {
+    public SicPaciente(Integer idSicPaciente, String telefonoPaciente) {
         this.idSicPaciente = idSicPaciente;
-        this.fkExpediente = fkExpediente;
         this.telefonoPaciente = telefonoPaciente;
     }
 
@@ -98,13 +100,6 @@ public class SicPaciente implements Serializable {
         this.idSicPaciente = idSicPaciente;
     }
 
-    public int getFkExpediente() {
-        return fkExpediente;
-    }
-
-    public void setFkExpediente(int fkExpediente) {
-        this.fkExpediente = fkExpediente;
-    }
 
     public String getTelefonoPaciente() {
         return telefonoPaciente;
@@ -208,6 +203,48 @@ public class SicPaciente implements Serializable {
 	 */
 	public void setFkSicEstadoPaciente(SicEstadoPaciente fkSicEstadoPaciente) {
 		this.fkSicEstadoPaciente = fkSicEstadoPaciente;
+	}
+
+	/**
+	 * @return the numeroExpediente
+	 */
+	public String getNumeroExpediente() {
+		return numeroExpediente;
+	}
+
+	/**
+	 * @param numeroExpediente the numeroExpediente to set
+	 */
+	public void setNumeroExpediente(String numeroExpediente) {
+		this.numeroExpediente = numeroExpediente;
+	}
+
+	/**
+	 * @return the duiPaciente
+	 */
+	public String getDuiPaciente() {
+		return duiPaciente;
+	}
+
+	/**
+	 * @param duiPaciente the duiPaciente to set
+	 */
+	public void setDuiPaciente(String duiPaciente) {
+		this.duiPaciente = duiPaciente;
+	}
+
+	/**
+	 * @return the fkSicContactoPaciente
+	 */
+	public SicContactoPaciente getFkSicContactoPaciente() {
+		return fkSicContactoPaciente;
+	}
+
+	/**
+	 * @param fkSicContactoPaciente the fkSicContactoPaciente to set
+	 */
+	public void setFkSicContactoPaciente(SicContactoPaciente fkSicContactoPaciente) {
+		this.fkSicContactoPaciente = fkSicContactoPaciente;
 	}
     
 }
